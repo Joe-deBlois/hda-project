@@ -66,9 +66,36 @@ def Consolidate_Datasets(final_dataframe_name, *datasets):
 #                     "Parkinson's/park6_ct.csv", 
 #                     "Parkinson's/park7_ct.csv")
 
-Consolidate_Datasets("Clinical_Trials_LeweyBodyDementia", 
-                     "Lewey Body Dementia/lbd1_ct.csv",
-                     "Lewey Body Dementia/lbd2_ct.csv",
-                     "Lewey Body Dementia/lbd3_ct.csv",
-                     "Lewey Body Dementia/lbd4_ct.csv", 
-                     "Lewey Body Dementia/lbd5_ct.csv")
+#Consolidate_Datasets("Clinical_Trials_LewyBodyDementia", 
+#                     "Lewy Body Dementia/lbd1_ct.csv",
+#                     "Lewy Body Dementia/lbd2_ct.csv",
+#                     "Lewy Body Dementia/lbd3_ct.csv",
+#                     "Lewy Body Dementia/lbd4_ct.csv", 
+#                     "Lewy Body Dementia/lbd5_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_CTE", 
+#                     "Chronic Traumatic Encephalopathy/cte1_ct.csv",
+#                     "Chronic Traumatic Encephalopathy/cte2_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_FTD", 
+#                     "Frontotemporal Dementia/ftd1_ct.csv",
+#                     "Frontotemporal Dementia/ftd2_ct.csv",
+#                     "Frontotemporal Dementia/ftd2_ct.csv",
+#                     "Frontotemporal Dementia/ftd2_ct.csv",
+#                     "Frontotemporal Dementia/ftd2_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_VascularDementia", 
+#                     "Vascular Dementia/vd1_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_PSP", 
+#                     "Progressive Supranuclear Palsy/psp1_ct.csv", 
+#                     "Progressive Supranuclear Palsy/psp2_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_MSA", 
+#                     "Multiple System Atrophy/msa1_ct.csv",
+#                     "Multiple System Atrophy/msa2_ct.csv",
+#                     "Multiple System Atrophy/msa3_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_NCL", 
+#                     "Neuronal Ceroid Lipofuscinoses/ncl1_ct.csv",
+#                     "Neuronal Ceroid Lipofuscinoses/ncl2_ct.csv")
