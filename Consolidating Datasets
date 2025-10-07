@@ -1,0 +1,67 @@
+import pandas as pd
+
+#first set correct working directory
+from pathlib import Path
+
+# Get the directory of the current script
+wd = Path(__file__).parent
+
+# Change the current directory to that folder
+import os
+datasets_dir = wd / "Datasets"
+os.chdir(datasets_dir)
+
+print("Current working directory:", Path.cwd())
+
+
+def Consolidate_Datasets(final_dataframe_name, *datasets):
+    #step 1: initialize empty dataframe
+    final_dataframe = pd.DataFrame() 
+    for dataset in datasets: 
+        pd_dataset = pd.read_csv(dataset)
+    #concatenate datasets while avoiding duplicates w.r.t. "NCT Number"
+        final_dataframe = pd.concat([final_dataframe, pd_dataset], ignore_index=True)
+        final_dataframe.drop_duplicates(subset='NCT Number', inplace=True)
+    #save as one file
+    final_dataframe.to_csv(f"{final_dataframe_name}.csv", index=False)  
+    print("Done!")                 
+  
+#Consolidate_Datasets("Clinical_Trials_Alzheimers", 
+#                     "Alzheimer's/alz1_ct.csv",
+#                     "Alzheimer's/alz2_ct.csv",
+#                     "Alzheimer's/alz3_ct.csv",
+#                     "Alzheimer's/alz4_ct.csv",
+#                     "Alzheimer's/alz5_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_ALS", 
+#                     "Amyotrophic Lateral Sclerosis/als1_ct.csv",
+#                     "Amyotrophic Lateral Sclerosis/als2_ct.csv",
+#                     "Amyotrophic Lateral Sclerosis/als3_ct.csv",
+#                     "Amyotrophic Lateral Sclerosis/als4_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_CJD", 
+#                     "Creutzfeldt-Jakob Disease/cj1_ct.csv",
+#                     "Creutzfeldt-Jakob Disease/cj2_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_Huntingtons", 
+#                     "Huntington's/hun1_ct.csv",
+#                     "Huntington's/hun2_ct.csv",
+#                     "Huntington's/hun3_ct.csv",
+#                     "Huntington's/hun4_ct.csv", 
+#                     "Huntington's/hun5_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_MultipleSclerosis", 
+#                     "Multiple Sclerosis/ms1_ct.csv",
+#                     "Multiple Sclerosis/ms2_ct.csv",
+#                     "Multiple Sclerosis/ms3_ct.csv",
+#                     "Multiple Sclerosis/ms4_ct.csv", 
+#                     "Multiple Sclerosis/ms5_ct.csv")
+
+#Consolidate_Datasets("Clinical_Trials_Parkinsons", 
+#                     "Parkinson's/park1_ct.csv",
+#                     "Parkinson's/park2_ct.csv",
+#                     "Parkinson's/park3_ct.csv",
+#                     "Parkinson's/park4_ct.csv", 
+#                     "Parkinson's/park5_ct.csv", 
+#                     "Parkinson's/park6_ct.csv", 
+#                     "Parkinson's/park7_ct.csv")
