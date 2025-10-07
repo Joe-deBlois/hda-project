@@ -65,3 +65,10 @@ def Consolidate_Datasets(final_dataframe_name, *datasets):
 #                     "Parkinson's/park5_ct.csv", 
 #                     "Parkinson's/park6_ct.csv", 
 #                     "Parkinson's/park7_ct.csv")
+
+Consolidate_Datasets("Clinical_Trials_LeweyBodyDementia", 
+                     "Lewey Body Dementia/lbd1_ct.csv",
+                     "Lewey Body Dementia/lbd2_ct.csv",
+                     "Lewey Body Dementia/lbd3_ct.csv",
+                     "Lewey Body Dementia/lbd4_ct.csv", 
+                     "Lewey Body Dementia/lbd5_ct.csv")
