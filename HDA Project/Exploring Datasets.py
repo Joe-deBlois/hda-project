@@ -60,6 +60,23 @@ for name, df in datasets.items():
     print("# of male-only studies: ", count_male)
     print("# of female-only studies: ", count_female)
     print("# of all-sex studies: ", count_all)
+    
+    df["Age"] = df["Age"].fillna("").str.split(',')
+    df["Accepting Children"] = 0 #binary per row
+    df["Accepting Adults"] = 0 #binary per row
+    df["Accepting Older Adults"] = 0 #binary per row
+
+    for idx, row in df.iterrows():
+        if "CHILD" in row["Age"]:
+            df.at[idx, "Accepting Children"] = 1
+        if "ADULT" in row["Age"]:
+            df.at[idx, "Accepting Adults"] = 1
+        if "OLDER_ADULT" in row["Age"]:
+            df.at[idx, "Accepting Older Adults"] = 1
+    
+    print("# of studies accepting children: ", df["Accepting Children"].sum())
+    print("# of studies accepting adults: ", df["Accepting Adults"].sum())
+    print("# of studies accepting older adults: ", df["Accepting Older Adults"].sum())
         
     #Standardize free-text in "Brief Summary" and "Interventions"
     df["Brief Summary"] = df["Brief Summary"].str.lower()
@@ -166,5 +183,5 @@ for drug, ds in sorted(common_drugs.items()):
 print(f"\nNumber of shared drugs: {len(common_drugs)}")
 
 
-
+print(ALS["Accepting Children"].head(5))
 
