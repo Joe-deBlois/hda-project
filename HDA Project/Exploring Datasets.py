@@ -1,4 +1,6 @@
 import pandas as pd
+import math
+import matplotlib.pyplot as plt
 
 #first set correct working directory
 from pathlib import Path
@@ -81,6 +83,23 @@ for name, df in datasets.items():
     #Standardize free-text in "Brief Summary" and "Interventions"
     df["Brief Summary"] = df["Brief Summary"].str.lower()
     df["Interventions"] = df["Interventions"].str.lower()
+
+    #Average number of participants (rounded up to nearest integer)
+    print("Average # of participants: ", math.ceil(df["Enrollment"].sum())/len(df["Enrollment"]))
+
+    #rough plot just to find outliers
+    #x-axis = list of trial IDs
+    #y-axis = list of enrollment numbers
+    #each point = 1 clinical trial
+    trial_ids = list(df["NCT Number"])
+    enrollment = list(df["Enrollment"])
+    plt.scatter(trial_ids, enrollment)
+    plt.plot(trial_ids, enrollment, linestyle='--', alpha=0.6)
+    plt.title(f'{name} Trial Enrollments')
+    plt.xlabel('Trial ID')
+    plt.ylabel('Enrollment')
+    plt.show()
+
 
     #trying to get all drug names from Interventions col
     df["Interventions"] = df["Interventions"].fillna("").str.split('|')
