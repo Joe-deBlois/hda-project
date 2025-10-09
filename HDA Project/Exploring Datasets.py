@@ -47,11 +47,11 @@ datasets = {
     "VascDem": VascDem
 }
 
-#I checked and they all have the same columns; only need to print once
+#I checked and all datasets have exactly the same columns; only need to print once
 print("Column names: ")
 print(ALS.columns.tolist())
 
-#All unique values for a column in every dataset
+#data exploration loop over every dataset
 for name, df in datasets.items(): 
     print(f"Dataset: {name}")
     
