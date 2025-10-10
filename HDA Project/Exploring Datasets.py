@@ -70,11 +70,12 @@ for name, df in datasets.items():
     df["Accepting Older Adults"] = 0 #binary per row
 
     for idx, row in df.iterrows():
-        if "CHILD" in row["Age"]:
+        age_groups = [a.strip() for a in row["Age"] if isinstance(a, str)]
+        if "CHILD" in age_groups:
             df.at[idx, "Accepting Children"] = 1
-        if "ADULT" in row["Age"]:
+        if "ADULT" in age_groups:
             df.at[idx, "Accepting Adults"] = 1
-        if "OLDER_ADULT" in row["Age"]:
+        if "OLDER_ADULT" in age_groups:
             df.at[idx, "Accepting Older Adults"] = 1
     
     print("# of studies accepting children: ", df["Accepting Children"].sum())
@@ -152,7 +153,7 @@ for name, df in datasets.items():
     #x-axis: start dates (year)
     #y-axis: sex
     #each datapoint is a clinical trial
-    df["Start Year"] = pd.to_datetime(df["Start Date"]).dt.year
+    df["Start Year"] = pd.to_datetime(df["Start Date"], format="mixed", errors="coerce").dt.year
     df["Sex"] = df["Sex"].str.upper().fillna("UNKNOWN")
     palette = {
     "FEMALE": "deeppink",
@@ -173,10 +174,10 @@ for name, df in datasets.items():
     plt.figure(figsize=(10,6))
     for col, color in zip(
         ["Accepting Children", "Accepting Adults", "Accepting Older Adults"],
-        ["gold", "seagreen", "royalblue"]
+        ["gold", "red", "royalblue"]
     ):
         yearly = df.groupby("Start Year")[col].sum()
-        plt.plot(yearly.index, yearly.values, marker="o", label=col.replace("Accepting ", ""), color=color)
+        plt.plot(yearly.index, yearly.values, marker="o", label=col.replace("Accepting ", ""), color=color, alpha = 0.5)
 
     plt.title(f"{name} Trials — Age Inclusion Trends Over Time")
     plt.xlabel("Start Year")
@@ -242,4 +243,8 @@ print(f"\nNumber of shared drugs: {len(common_drugs)}")
 
 
 print(ALS["Accepting Children"].head(5))
+
+#find if there are any repeated NCT numbers throughout different datasets (i.e. trials test mulitple diseases. This may be a problem)
+
+#cycle through drugs over the years, frequency of how many sturies they appeared in and for what disease (color-code diseases). 
 
