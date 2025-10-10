@@ -1,6 +1,7 @@
 import pandas as pd
 import math
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 #first set correct working directory
 from pathlib import Path
@@ -146,6 +147,44 @@ for name, df in datasets.items():
         df.at[idx, "Diagnostic Test Interventions"] = ", ".join(diagnostic_tests) if diagnostic_tests else None
         df.at[idx, "Other Interventions"] = ", ".join(other_names) if other_names else None
         df.at[idx, "Biological Interventions"] = ", ".join(biological_names) if biological_names else None
+
+    #Graph the breakdown of gender by year over all studies of this disease
+    #x-axis: start dates (year)
+    #y-axis: sex
+    #each datapoint is a clinical trial
+    df["Start Year"] = pd.to_datetime(df["Start Date"]).dt.year
+    df["Sex"] = df["Sex"].str.upper().fillna("UNKNOWN")
+    palette = {
+    "FEMALE": "deeppink",
+    "MALE": "royalblue",
+    "ALL": "mediumseagreen",
+    "UNKNOWN": "gray"}
+    sns.countplot(data=df, x="Start Year", hue="Sex", palette = palette)
+    plt.title(f"{name} Trials by Gender Eligibility and Year")
+    plt.xlabel("Start Year")
+    plt.ylabel("Number of Trials")
+    plt.legend(title="Sex Category")
+    plt.show()
+
+    #Graph the breakdown of age by year over all studies of this disease
+    #x-axis: start dates (year)
+    #y-axis: age
+    #each datapoint is a clinical trial
+    plt.figure(figsize=(10,6))
+    for col, color in zip(
+        ["Accepting Children", "Accepting Adults", "Accepting Older Adults"],
+        ["gold", "seagreen", "royalblue"]
+    ):
+        yearly = df.groupby("Start Year")[col].sum()
+        plt.plot(yearly.index, yearly.values, marker="o", label=col.replace("Accepting ", ""), color=color)
+
+    plt.title(f"{name} Trials — Age Inclusion Trends Over Time")
+    plt.xlabel("Start Year")
+    plt.ylabel("Number of Trials")
+    plt.legend(title="Age Group")
+    plt.grid(True, linestyle="--", alpha=0.3)
+    plt.tight_layout()
+    plt.show()
 
 
 
