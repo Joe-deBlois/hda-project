@@ -204,6 +204,8 @@ def clean_drug_name(name):
         return None
     # lowercase
     name = name.lower()
+    if "placebo" in name: 
+        return "placebo"
     # remove content inside parentheses
     name = re.sub(r"\(.*?\)", "", name)
     # remove extra spaces and punctuation
@@ -217,7 +219,7 @@ def clean_drug_name(name):
 from collections import defaultdict
 
 dataset_drug_sets = {}
-
+all_drugs = [] 
 for name, df in datasets.items():
     # extract all drugs from that dataset
     drugs = []
@@ -226,7 +228,22 @@ for name, df in datasets.items():
             d_clean = clean_drug_name(d)
             if d_clean:
                 drugs.append(d_clean)
+                all_drugs.append(d_clean)
     dataset_drug_sets[name] = set(drugs)
+all_drugs = list(set(all_drugs))
+
+#check each drug by hand now
+#number of unchecked drugs: 
+len(all_drugs)
+
+keywords = ["saline", "cell", "therapy", "therapies", "placebo", "vehicle", "treatment", "infusion", "injection", "anesthesia", "physician", "injection", "control", "study", "18f", "11c", "pet", "f18", "radiotracer", "f18", "11c", "piB", "florbet", "tau", "ioflupane", "gadoter", "mbq", "neuraceq", "pe2i", "ucb-j", "definity"]
+all_drugs = [drug for drug in all_drugs if not any(k in drug for k in keywords)]
+
+#number of checked drugs
+len(all_drugs)
+
+#some drugs say "and"
+
 
 #find drugs in common across datasets
 drug_to_datasets = defaultdict(set)
@@ -240,11 +257,22 @@ print("Drugs in multiple datasets:\n")
 for drug, ds in sorted(common_drugs.items()):
     print(f"{drug}: {', '.join(sorted(ds))}")
 print(f"\nNumber of shared drugs: {len(common_drugs)}")
+print(f"\nNumber of all drugs: {len(all_drugs)}")
 
 
-print(ALS["Accepting Children"].head(5))
 
 #find if there are any repeated NCT numbers throughout different datasets (i.e. trials test mulitple diseases. This may be a problem)
+nct_nums_all_trials = dict()
+for name, df in datasets.items(): 
+    for nct_number in df["NCT Number"]:
+        if nct_number in nct_nums_all_trials:
+            nct_nums_all_trials[nct_number] += 1
+        else:
+            nct_nums_all_trials[nct_number] = 1
+print(nct_nums_all_trials)
 
-#cycle through drugs over the years, frequency of how many sturies they appeared in and for what disease (color-code diseases). 
+non_unique_trials = {key:value for key,value in nct_nums_all_trials.items() if value !=1}
+print(non_unique_trials)
+
+#cycle through drugs over the years, frequency of how many studies they appeared in and for what disease (color-code diseases). 
 
