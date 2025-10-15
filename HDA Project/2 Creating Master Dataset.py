@@ -1,3 +1,16 @@
+#Next steps: 
+#done ---1) consolidate all datasets, adding "DISEASE" as a label
+#done ---2) break up drugs, interventions, gender, age
+#3) clean up drugs
+#4) any repeated NCT Trials across diseases??? If yes, determine how to treat these repeated trials
+#5) save master dataset
+#6) exploration plots
+#7) network?
+#8) find drug names in pubmed and do similar process
+
+
+
+
 import pandas as pd
 import math
 import matplotlib.pyplot as plt
@@ -50,6 +63,15 @@ datasets = {
     "VascDem": VascDem
 }
 
+
+
+
+
+
+
+
+
+
 #############################################
 #           CREATE A MASTER DATASET         #
 #############################################
@@ -70,6 +92,15 @@ print(master_df.head())
 
 print("Column names: ")
 print(master_df.columns.tolist())
+
+
+
+
+
+
+
+
+
 
 #############################################
 #           CLEAN AGE COLUMN                #
@@ -92,6 +123,15 @@ for idx, row in master_df.iterrows():
         master_df.at[idx, "Accepting Adults"] = 1
     if any("OLDER" in a for a in age_groups):
         master_df.at[idx, "Accepting Older Adults"] = 1
+
+
+
+
+
+
+
+
+
 
 #############################################
 #           CLEAN DRUG COLUMN                #
@@ -247,6 +287,16 @@ print(f"Number of unique cleaned drugs: {len(unique_drugs)}")
 
 potential_drug_codes = ['gsk3888130b',]
 
+
+
+
+
+
+
+
+
+
+
 ##################################################
 #        CLEAN OTHER INTERVENTIONS               #
 ##################################################
@@ -291,3 +341,16 @@ for idx, interventions_list in master_df["Interventions"].items():
     master_df.at[idx, "Diagnostic Test Interventions"] = ", ".join(diagnostic_tests) if diagnostic_tests else None
     master_df.at[idx, "Other Interventions"] = ", ".join(other_names) if other_names else None
     master_df.at[idx, "Biological Interventions"] = ", ".join(biological_names) if biological_names else None
+
+
+
+
+
+
+
+
+
+
+##################################################
+#     SAVE MASTER DATASET (CLINICALTRIALS.GOV)   #
+##################################################
