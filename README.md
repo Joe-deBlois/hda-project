@@ -10,3 +10,15 @@ Other analyses:
 - Gender, enrollment #, and age groups considered across years and diseases? 
 - Drugs considered across years, prevalence of those drugs, are some drugs used for multiple diseases? Maybe select only the most prevalent to do further analysis on.
 - How to consider drug codes? 
+
+
+
+Joe Next Steps: 
+done ---1 consolidate all datasets, adding "DISEASE" as a label
+done ---2 break up drugs, interventions, gender, age
+done ---3 clean up drugs
+done ---4 any repeated NCT Trials across diseases??? If yes, determine how to treat these repeated trials
+done ---5 save master dataset
+6 exploration plots and drugs shared by >= 2 diseases
+7 network?
+8 find drug names in pubmed and do similar process

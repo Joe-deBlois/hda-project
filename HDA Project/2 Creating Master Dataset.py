@@ -1,15 +1,3 @@
-#Next steps: 
-#done ---1) consolidate all datasets, adding "DISEASE" as a label
-#done ---2) break up drugs, interventions, gender, age
-#done ---3) clean up drugs
-#4) any repeated NCT Trials across diseases??? If yes, determine how to treat these repeated trials
-#5) save master dataset
-#6) exploration plots and drugs shared by >= 2 diseases
-#7) network?
-#8) find drug names in pubmed and do similar process
-
-
-
 
 import pandas as pd
 import math
@@ -659,6 +647,88 @@ for d in unique_drugs:
 
 print("Should be equal: " + str(len(unique_drugs)) + " and " +str(len(potential_drug_codes)+len(drugs)))
 
+#unique_drugs, with columns "drug" and "potential drug code"
+#if d in drug, drug col = 1 and potential drug code col = 0, etc.
+drug_inventory = pd.DataFrame().assign(substance_name = unique_drugs)
+drug_inventory["drug"] = None
+drug_inventory["potential_drug_code"] = None
+
+for i in range(len(drug_inventory["substance_name"])): 
+    if drug_inventory["substance_name"][i] in drugs:
+        drug_inventory["drug"][i] = 1
+        drug_inventory["potential_drug_code"][i] = 0
+    else:
+        drug_inventory["drug"][i] = 0
+        drug_inventory["potential_drug_code"][i] = 1
+
+drug_inventory.to_csv("CT_Drug_Inventory.csv", index=False)  
+print("Saved drug inventory")
+
+
+
+
+
+
+
+#################################################
+#      CHECK FOR REPEATED NCT NUMBERS           #
+#################################################
+
+#check for repeated NCT numbers
+#if there are no repeats, a set should have the same length as the column
+print("Total # of NCT Numbers: " + str(len(master_df["NCT Number"])))
+print("Total # of unique NCT Numbers: " + str(len(set(master_df["NCT Number"]))))
+
+#there is some repetition. Which ones?
+all_trials = dict()
+for trial in master_df["NCT Number"]:
+    if trial not in all_trials: 
+        all_trials[trial] = 1
+    else:
+        all_trials[trial] += 1
+
+repeated_trials = list()
+for trial in all_trials: 
+    if all_trials[trial] > 1: 
+        repeated_trials.append(trial)
+
+print("84 repeated trials")
+
+# Filter repeated trials
+repeated_trials_df = master_df[master_df["NCT Number"].duplicated(keep=False)]
+
+# Group by NCT Number and combine diseases as comma-separated string
+grouped = (
+    repeated_trials_df
+    .groupby("NCT Number")["Disease"]
+    .apply(lambda diseases: ", ".join(sorted(diseases.unique())))
+    .reset_index()
+)
+
+# Display in the desired format
+for _, row in grouped.iterrows():
+    print(f"{row['NCT Number']} | {row['Disease']}")
+
+print("Since there is repetition of NCT Numbers, but I would like to keep seperation by disease, let's split disease into columns like disease: FTD, disease: NCL, etc. and make them binary, and collapse the repeated trials")
+
+disease_names = set(master_df["Disease"])
+for name in disease_names:
+    master_df["disease: " + name] = (master_df["Disease"] == name).astype(int)
+
+for idx, row in grouped.iterrows():
+    nct_number = row["NCT Number"]
+    diseases_str = row["Disease"]
+
+    for disease in disease_names:
+        if disease in diseases_str:
+            master_df.loc[master_df["NCT Number"] == nct_number, "disease: " + disease] = 1
+
+#drop the original "disease" column now: 
+master_df = master_df.drop("Disease", axis=1)
+
+# Keep first occurrence of each unique value in 'NCT Number'
+master_df = master_df.drop_duplicates(subset="NCT Number", keep="first")
+#I checked--the length of master_df now equals "Total # of unique NCT Numbers" calcluated previously
 
 
 
@@ -726,3 +796,6 @@ for idx, interventions_list in master_df["Interventions"].items():
 ##################################################
 #     SAVE MASTER DATASET (CLINICALTRIALS.GOV)   #
 ##################################################
+
+master_df.to_csv("CT_Master_DataFrame.csv", index=False)  
+print("Saved Master DataFrame")
