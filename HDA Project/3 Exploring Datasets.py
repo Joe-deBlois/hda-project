@@ -2,6 +2,7 @@ import pandas as pd
 import math
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 #first set correct working directory
 from pathlib import Path
@@ -33,7 +34,7 @@ palette_mapping = {
     "disease: ALS" : "#FFA500", 
     "disease: ALZ" :"#00CC99",
     "disease: Park" : "#9966CC", 
-    "disease: LBD" :"#FF99CC", 
+    "disease: LBD" :"#1B1B1B", 
     "disease: VascDem" :"#6699FF"
 }
 
@@ -43,19 +44,59 @@ diseases = ['disease: CJD', 'disease: LBD', 'disease: MSA',  'disease: Hunt', 'd
 
 
 
+#################################################
+#   sexes considered for trials by disease:     #
+#################################################
 
-#sexes considered for trials by disease: 
+count_male = dict()
+count_female = dict()
+count_all = dict()
+percent_male = dict()
+percent_female = dict()
+percent_all = dict() 
+
 for disease in diseases:
-    subset = master_df[master_df[disease] == 1]
+    subset = master_df[master_df[disease].astype(str) == "1"]
 
-    count_male = (subset["Sex"] == "MALE").sum()
-    count_female = (subset["Sex"] == "FEMALE").sum()
-    count_all = (subset["Sex"] == "ALL").sum()
+    count_male[disease] = (subset["Sex"] == "MALE").sum()
+    count_female[disease] = (subset["Sex"] == "FEMALE").sum()
+    count_all[disease] = (subset["Sex"] == "ALL").sum()
+    percent_male[disease] = round((count_male[disease]/(count_male[disease] + count_female[disease] + count_all[disease]))*100, 2)
+    percent_female[disease] = round((count_female[disease]/(count_male[disease] + count_female[disease] + count_all[disease]))*100, 2)
+    percent_all[disease] = round((count_all[disease]/(count_male[disease] + count_female[disease] + count_all[disease]))*100, 2)
 
-    print(f"\n{disease}:")
-    print("# of male-only studies: " + str(count_male) + "     " + str(round((count_male/(count_male + count_female + count_all))*100, 2)) + "%")
-    print("# of female-only studies: "+ str(count_female) + "     " + str(round((count_female/(count_male + count_female + count_all))*100, 2)) + "%")
-    print("# of all-sex studies: "+ str(count_all) + "     " + str(round((count_all/(count_male + count_female + count_all))*100, 2)) + "%")
+    print(count_male)
+
+    #plot: y-axis = %, x-axis = disease, 3 columns per disease (%male, %female, %all, # of trials in each bar)
+group_spacing = 2
+width = 0.5 #width of each bar
+x = np.arange(len(diseases)) * group_spacing
+offsets = [-width, 0, width]  
+
+male_vals = [percent_male[d] for d in diseases]
+female_vals = [percent_female[d] for d in diseases]
+all_vals = [percent_all[d] for d in diseases]
+fig, ax = plt.subplots(figsize=(12, 6))  
+bars_male = ax.bar(x + offsets[0], male_vals, width, label='Male', color = "#FFA500")
+bars_female = ax.bar(x + offsets[1], female_vals, width, label='Female', color="#00CC99")
+bars_all = ax.bar(x + offsets[2], all_vals, width, label='All', color="#EE6677")
+
+# Add count numbers inside the bars 
+for i, disease in enumerate(diseases):
+    ax.text(x[i] + offsets[0], male_vals[i] / 2, str(count_male[disease]), ha='center', va='center', fontsize=8, color='black')
+    ax.text(x[i] + offsets[1], female_vals[i] / 2, str(count_female[disease]), ha='center', va='center', fontsize=8, color='black')
+    ax.text(x[i] + offsets[2], all_vals[i] / 2, str(count_all[disease]), ha='center', va='center', fontsize=8, color='black')
+
+#Labels and Formatting
+ax.set_ylabel("Percentage of Trials (%)")
+ax.set_xlabel("Diseases")
+ax.set_title("Percentage of Trials Accepting Each Sex by Disease")
+ax.set_xticks(x)
+disease_labels = [d.replace("disease: ", "") for d in diseases]
+ax.set_xticklabels(disease_labels, rotation=45, ha='right')
+ax.legend()
+plt.tight_layout()
+plt.show()
 
 
 
@@ -63,7 +104,27 @@ for disease in diseases:
 
 
 
-#ages considered for trials by disease: 
+################################################
+#   ages considered for trials by disease:     # 
+# ############################################## 
+count_male = dict()
+count_female = dict()
+count_all = dict()
+percent_male = dict()
+percent_female = dict()
+percent_all = dict() 
+
+for disease in diseases:
+    subset = master_df[master_df[disease].astype(str) == "1"]
+
+    count_male[disease] = (subset["Sex"] == "MALE").sum()
+    count_female[disease] = (subset["Sex"] == "FEMALE").sum()
+    count_all[disease] = (subset["Sex"] == "ALL").sum()
+    percent_male[disease] = round((count_male[disease]/(count_male[disease] + count_female[disease] + count_all[disease]))*100, 2)
+    percent_female[disease] = round((count_female[disease]/(count_male[disease] + count_female[disease] + count_all[disease]))*100, 2)
+    percent_all[disease] = round((count_all[disease]/(count_male[disease] + count_female[disease] + count_all[disease]))*100, 2)
+
+    print(count_male)
 
 
 
