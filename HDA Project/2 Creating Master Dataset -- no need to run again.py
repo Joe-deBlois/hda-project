@@ -785,12 +785,27 @@ for idx, interventions_list in master_df["Interventions"].items():
     master_df.at[idx, "Biological Interventions"] = ", ".join(biological_names) if biological_names else None
 
 
+drug_list = drug_inventory['substance_name'].dropna().str.lower().tolist()
+
+def standardize_drug_text(raw_text):
+    if pd.isna(raw_text):
+        return None
+    text = raw_text.lower()
+    found = []
+    for drug in drug_list:
+        # match full drug names within text
+        if re.search(rf'\b{re.escape(drug)}\b', text):
+            found.append(drug)
+    # join multiple matches, or keep "placebo" if it’s the only one
+    if not found and 'placebo' in text:
+        return 'placebo'
+    elif found:
+        return ', '.join(sorted(set(found)))
+    return None
 
 
-
-
-
-
+master_df['Drug Interventions Cleaned'] = master_df['Drug Interventions'].apply(standardize_drug_text)
+master_df = master_df[~master_df['Drug Interventions Cleaned'].eq('placebo')]
 
 
 ##################################################

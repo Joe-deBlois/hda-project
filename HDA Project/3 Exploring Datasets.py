@@ -3,8 +3,7 @@ import math
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-import matplotlib.ticker as ticker
-
+import matplotlib.ticker as ticker  
 
 #first set correct working directory
 from pathlib import Path
@@ -211,6 +210,10 @@ plt.show()
 
 
 
+
+
+
+
 #################################################################
 #   Average number of participants over all trials by disease:  # 
 #################################################################
@@ -221,6 +224,14 @@ for disease in diseases:
 
     print(f"Average # of participants for {disease}: " + str(math.ceil((subset["Enrollment"].sum())/len(subset["Enrollment"]))))
   
+
+
+
+
+
+
+
+
 
 
 
@@ -246,7 +257,7 @@ for disease in diseases:
     plt.ylabel('Enrollment')
     plt.show()
 
-###Group plot###
+###Group plot with outliers###
 plot_df = pd.DataFrame([
     {"Disease": disease, "Enrollment": row["Enrollment"]}
     for _, row in master_df.iterrows()
@@ -281,12 +292,63 @@ ax = sns.boxplot(
     showfliers= True #show outliers
 )
 
-plt.title("Trial Enrollment Sizes by Disease", fontsize=16, pad=20)
+plt.title("Trial Enrollment Sizes by Disease\n(including outliers)", fontsize=16, pad=20)
 plt.xlabel("Enrollment (participants)", fontsize=12)
 plt.ylabel("")
 plt.grid(axis="x", linestyle="--", alpha=0.6)
 plt.tight_layout()
 plt.show()
+
+
+
+###Group plot without outliers ###
+plot_df = pd.DataFrame([
+    {"Disease": disease, "Enrollment": row["Enrollment"]}
+    for _, row in master_df.iterrows()
+    for disease in diseases
+    if str(row.get(disease, 0)) == "1" and pd.notna(row["Enrollment"])
+])
+
+# Drop any invalid or zero enrollments if desired
+plot_df = plot_df[plot_df["Enrollment"] > 0]
+
+# Sort diseases by median enrollment
+median_order = (
+    plot_df.groupby("Disease")["Enrollment"]
+    .median()
+    .sort_values(ascending=True)
+    .index
+)
+
+# Build color-blind-safe palette from your mapping
+palette = {d: palette_mapping.get(d) for d in diseases}
+
+# Make figure
+plt.figure(figsize=(10, 8))
+
+# Horizontal boxplot (stacked vertically)
+ax = sns.boxplot(
+    data=plot_df,
+    y="Disease",
+    x="Enrollment",
+    order=median_order,
+    palette=palette,
+    showfliers= False #don't  outliers
+)
+
+plt.title("Trial Enrollment Sizes by Disease\n(not including outliers)", fontsize=16, pad=20)
+plt.xlabel("Enrollment (participants)", fontsize=12)
+plt.ylabel("")
+plt.grid(axis="x", linestyle="--", alpha=0.6)
+plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
 
 
 
@@ -348,6 +410,19 @@ ax = plt.gca()
 ax.xaxis.set_major_locator(ticker.MaxNLocator(integer=True))
 plt.tight_layout()
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -454,11 +529,33 @@ plt.show()
 
 
 
-#what drugs are common across datasets?
+
+
+
+
+#################################################
+#     what drugs are common across datasets?    #
+#################################################
 #create a mapping of the dataset --> set of cleaned drug named
 #this will make dataset_drug_sets look like {"ALS" : {a, b, c}, "Alz" : {c, g, a}, etc...}
+disease_drug_relationship = {d.replace("disease: ", ""): set() for d in diseases}
 
-
+for disease in diseases: 
+    clean_name = disease.replace("disease: ", "")
+    
+    # subset rows where that disease == 1
+    subset = master_df[master_df[disease].astype(str) == "1"]
+    
+    # iterate through Drug Interventions column
+    for drug_entry in subset["Drug Interventions"]:
+        if pd.isna(drug_entry): 
+            continue
+        
+        # handle multiple drugs in one cell (e.g. "DrugA, DrugB")
+        for drug in str(drug_entry).split(","):
+            cleaned_drug = drug.strip().title()  # normalize formatting
+            if cleaned_drug:
+                disease_drug_relationship[clean_name].add(cleaned_drug)
 
 
 
@@ -468,27 +565,4 @@ plt.show()
 
 
 
-
-
-
-
-#what drugs are common across datasets?
-
-#create a mapping of the dataset --> set of cleaned drug named
-#this will make dataset_drug_sets look like {"ALS" : {a, b, c}, "Alz" : {c, g, a}, etc...}
-
-
-#find drugs in common across datasets
-drug_to_datasets = defaultdict(set)
-
-for dataset_name, drugs in dataset_drug_sets.items():
-    for drug in drugs:
-        drug_to_datasets[drug].add(dataset_name)
-common_drugs = {drug: ds for drug, ds in drug_to_datasets.items() if len(ds) > 1}
-
-print("Drugs in multiple datasets:\n")
-for drug, ds in sorted(common_drugs.items()):
-    print(f"{drug}: {', '.join(sorted(ds))}")
-print(f"\nNumber of shared drugs: {len(common_drugs)}")
-print(f"\nNumber of all drugs: {len(all_drugs)}")
 
