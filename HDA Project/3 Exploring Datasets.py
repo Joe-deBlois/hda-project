@@ -7,6 +7,12 @@ import matplotlib.ticker as ticker
 
 from collections import defaultdict
 
+#look for how many trials contain more than one disease and contain at least one drug
+#look for how many trials contain more than one disease and drug? 
+#UMLS to find drug terminology
+#Disease-Disease network with drug connections
+
+
 #first set correct working directory
 from pathlib import Path
 
