@@ -1,0 +1,453 @@
+substance_name,drug,potential_drug_code
+aab-003 pf-05236812,0,1
+abbv-8e,0,1
+abbv-951,0,1
+abiraterone,1,0
+abt-slv,1,0
+ac-3933,0,1
+acetaminophen,1,0
+acetylcysteine,1,0
+acetylsalicylic acid,1,0
+acitretin,1,0
+acoramidis,1,0
+act-128800,0,1
+acthar,1,0
+adrabetadex,1,0
+adrenocorticotropic hormone,1,0
+aducanumab,1,0
+agb220,0,1
+alemtuzumab,1,0
+alprazolam,1,0
+amantadine,1,0
+ampreloxetine,1,0
+anakinra,1,0
+ank-700,0,1
+apl-130277,0,1
+apomorphine,1,0
+arbaclofen,1,0
+arimoclomol,1,0
+armodafinil,1,0
+aspirin,1,0
+astrostem,1,0
+at-1501,0,1
+ath-1017,0,1
+atomoxetine,1,0
+atorvastatin,1,0
+atropine,1,0
+atx-ms-1467,0,1
+auto-m-bfs,1,0
+avonex,1,0
+avp-786,0,1
+avp-923,0,1
+axs-05,0,1
+azd,1,0
+bapineuzumab,1,0
+basiliximab,1,0
+ben-2001,0,1
+benfotiamine,1,0
+benserazide,1,0
+bexarotene,1,0
+bia-1067,0,1
+bimagrumab,1,0
+binimetinib,1,0
+bleomycin,1,0
+bms-984923,0,1
+bortezomib,1,0
+branaplam,1,0
+brexpiprazole,1,0
+bryostatin,1,0
+btrx-246040,0,1
+buntanetapposiphen,1,0
+bupropion,1,0
+buspirone,1,0
+busulfan cyclophosphamide antithymocyte globulin,1,0
+cabaletta,1,0
+candesartan,1,0
+cannabidiol,1,0
+cannabis,1,0
+cap-1002,0,1
+capecitabine,1,0
+capsaicin,1,0
+carbamazepine,1,0
+carbidopa,1,0
+carbidopa-levodopa,1,0
+carbidopalevodopaentacapone,1,0
+carboplatin,1,0
+carmustine etoposide cytarabine,1,0
+carvedilol,1,0
+ceftriaxone,1,0
+cere-120,0,1
+cerebrolysin,1,0
+cetrizine,1,0
+chemotherapy,1,0
+cilostazol,1,0
+circadin,1,0
+cisplatin,1,0
+citalopram,1,0
+ck-2017357,0,1
+cladribine,1,0
+cladribinekg,1,0
+clemastine,1,0
+clenbuterol,1,0
+clonidine,1,0
+cmpatch,1,0
+cnm-au,1,0
+coenzyme q10,1,0
+copaxone,1,0
+corticotropin,1,0
+cpc-201,0,1
+creatine,1,0
+crenezumab,1,0
+curcumin,1,0
+cvt-301,0,1
+cyclophosphamide,1,0
+cystagon,1,0
+da-9805,0,1
+dabrafenib,1,0
+dacarbazine,1,0
+dantrolene,1,0
+dapagliflozin,1,0
+daratumumab,1,0
+daridorexant,1,0
+darunavir,1,0
+dasatinib,1,0
+dasatinib quercetin,1,0
+datscan ioflupane,1,0
+deferiprone,1,0
+definity,1,0
+deflazacort,1,0
+dexamethasone,1,0
+dexmedetomidine,1,0
+dextromethorphan,1,0
+diclofenac,1,0
+dimebon,1,0
+dimethyl fumarate,1,0
+diphenhydramine,1,0
+dm-1992,0,1
+docetaxel,1,0
+docosahexaenoic acid,1,0
+dolutegravir,1,0
+donanemab,1,0
+donepezil,1,0
+doxorubicin,1,0
+doxycycline,1,0
+dronabinol,1,0
+droxidopa,1,0
+duloxetine,1,0
+duodopa,1,0
+durvalumab,1,0
+egcg,1,0
+elezanumab,1,0
+empagliflozin,1,0
+ent-01,0,1
+entacapone,1,0
+enzalutamide,1,0
+epacadostat,1,0
+epi-589,0,1
+eribulin,1,0
+erythromycin,1,0
+escitalopram,1,0
+estriol,1,0
+eszopiclone,1,0
+eteplirsen,1,0
+etoposide,1,0
+everolimus,1,0
+evp-6124,0,1
+exenatide,1,0
+ezogabine,1,0
+fampridine,1,0
+fenofibrate,1,0
+fflutametamol,1,0
+filgrastim,1,0
+fingolimod,1,0
+florbetaben,1,0
+florbetapir,1,0
+flortaucipir f,1,0
+fluorouracil,1,0
+flutemetamol,1,0
+fluticasone,1,0
+fx-1006a,0,1
+gadoteridol,1,0
+galantamine,1,0
+ganaxolone,1,0
+gantenerumab,1,0
+gemcitabine,1,0
+ginkgo biloba,1,0
+glatiramer acetate,1,0
+gocovri,1,0
+gs-248,0,1
+ht-1001,0,1
+hydrocodoneapap,1,0
+ibudilast,1,0
+icosapent ethyl,1,0
+idalopirdine,1,0
+idazoxan,1,0
+idebenone,1,0
+immunoglobulin,1,0
+incmgapd-1 antibody,1,0
+incobotulinum toxin a,1,0
+inosine,1,0
+insulin,1,0
+intepirdine,1,0
+interferon,1,0
+interferon beta,1,0
+interferon beta-1a,1,0
+interferon beta-1b,1,0
+ioflupane,1,0
+ionis maptrx,1,0
+ipx,1,0
+irinotecan,1,0
+irsenontrine,1,0
+isis,1,0
+isocarboxazid,1,0
+isosorbide mononitrate,1,0
+isoxsuprine hydrochloride,1,0
+isradipine,1,0
+istradefylline,1,0
+itraconazole,1,0
+jzp-110,0,1
+ketamine,1,0
+km-819,0,1
+kns-760704,0,1
+l-acetyl carnitine,1,0
+l-arginine,1,0
+ladostigil hemitartrate,1,0
+lamivudine,1,0
+laquinimod,1,0
+lemborexant,1,0
+lenvatinib,1,0
+leucovorin,1,0
+levetiracetam,1,0
+levocarnitine,1,0
+levodopa,1,0
+levodopa-carbidopa,1,0
+levosimendan,1,0
+liothyronine sodium,1,0
+lipoic acid,1,0
+liraglutide,1,0
+lisdexamfetamine sulfate,1,0
+lithium,1,0
+lithium carbonate,1,0
+lubiprostone,1,0
+lucentis,1,0
+madopar,1,0
+mavenclad,1,0
+mci-186,0,1
+medi-551,0,1
+melatonin,1,0
+melperone,1,0
+melphalan,1,0
+memantine,1,0
+mesdopetam,1,0
+metformin,1,0
+methotrexate,1,0
+methylphenidate,1,0
+methylprednisolone,1,0
+metoprolol tartrate,1,0
+mexiletine,1,0
+microgynon,1,0
+midazolam,1,0
+miglustat,1,0
+minocycline,1,0
+mirabegron,1,0
+mirapex,1,0
+mk-1942,0,1
+mk-8189,0,1
+mk-8931,0,1
+mn-166,0,1
+modafinil,1,0
+monomethyl fumarate,1,0
+montelukast,1,0
+moxifloxacin,1,0
+msdc-0160,0,1
+mt-1186,0,1
+mycophenolate mofetil,1,0
+myobloc,1,0
+nabilone,1,0
+nabiximols,1,0
+naltrexone,1,0
+naproxen,1,0
+natalizumab,1,0
+nbt-nm,1,0
+nebivolol,1,0
+neflamapimod,1,0
+nelotanserin,1,0
+neupro,1,0
+nicotinamide,1,0
+nicotine,1,0
+nilotinib,1,0
+nlx-112,0,1
+novasoy,1,0
+nuedexta,1,0
+nusinersen,1,0
+obicetrapib,1,0
+ocrelizumab,1,0
+ofatumumab,1,0
+olaparib,1,0
+olesoxime,1,0
+olipudase alfa,1,0
+omega-3 fatty acids,1,0
+omeprazole,1,0
+onabotulinumtoxin a,1,0
+opicapone,1,0
+orm-12741,0,1
+oxaliplatin,1,0
+oxaloacetate,1,0
+oxybutynin,1,0
+ozanezumab,1,0
+ozanimod,1,0
+paclitaxel,1,0
+pantoprazole,1,0
+paracetamol,1,0
+parcopa,1,0
+paroxetine,1,0
+pazopanib,1,0
+pb060,0,1
+pembrolizumab,1,0
+pemetrexed,1,0
+pentoxifylline,1,0
+perampanel,1,0
+pf-00489791,0,1
+pf-02545920,0,1
+pf-04447943,0,1
+pf-06649751,0,1
+pf-06669571,0,1
+pf-06751979,0,1
+phenazopyridine,1,0
+piclozotan,1,0
+pimavanserin,1,0
+pioglitazone,1,0
+piromelatine,1,0
+plerixafor,1,0
+poly-iclc,1,0
+polyphenon e,1,0
+ponesimod,1,0
+posiphen,1,0
+pramipexole,1,0
+prazosin,1,0
+prazosin hydrochloride,1,0
+prednisolone,1,0
+prednisone,1,0
+pregabalin,1,0
+preladenant,1,0
+pridopidine,1,0
+procarbazine,1,0
+prolopa,1,0
+propofol,1,0
+ptc-589,0,1
+pyrimethamine,1,0
+quercetin,1,0
+quinacrine,1,0
+quinidine,1,0
+raloxifene,1,0
+raltegravir,1,0
+ramipril,1,0
+ranolazine,1,0
+rasagiline,1,0
+regorafenib,1,0
+reldesemtiv,1,0
+requip,1,0
+resveratrol,1,0
+revusiran,1,0
+rifaximin,1,0
+rilapladib,1,0
+riluzole,1,0
+rimeporide,1,0
+risdiplam,1,0
+risperidone,1,0
+ritonavir,1,0
+rituximab,1,0
+rivastigmine,1,0
+roflumilast,1,0
+ropinirole,1,0
+ropinirole + levodopa,1,0
+rosiglitazone,1,0
+rotigotine,1,0
+s-equol,1,0
+safinamide,1,0
+sage-718,0,1
+sagramostim,1,0
+sb-742457,0,1
+scopolamine,1,0
+scyllo-inositol,1,0
+sebelipase alfa,1,0
+selegiline,1,0
+seltorexant,1,0
+semagacestat,1,0
+semorinemab,1,0
+sepofarsen,1,0
+sertraline,1,0
+sildenafil,1,0
+simufilam,1,0
+simvastatin,1,0
+siponimod,1,0
+sirolimus,1,0
+sodium oligomannate,1,0
+solanezumab,1,0
+solifenacin,1,0
+som,1,0
+soticlestat,1,0
+sunitinib,1,0
+suvorexant,1,0
+synera,1,0
+t-817ma,0,1
+tacrolimus,1,0
+tafamidis,1,0
+tamoxifen,1,0
+tas-205,0,1
+tauroursodeoxycholic acid,1,0
+tavapadon,1,0
+td-959,0,1
+telmisartan,1,0
+temelimab,1,0
+temozolomide,1,0
+tenofovir alafenamide,1,0
+terazosin,1,0
+teriflunomide,1,0
+testosterone,1,0
+tetrabenazine,1,0
+tetrahydrobiopterin,1,0
+tipiracil,1,0
+tirasemtiv,1,0
+tocilizumab,1,0
+tofersen,1,0
+tolcapone,1,0
+tolebrutinib,1,0
+trametinib,1,0
+trehalose,1,0
+tremelimumab,1,0
+trifluridine,1,0
+trigel,1,0
+triheptanoin,1,0
+trimethobenzamide,1,0
+tropicamide,1,0
+troriluzole,1,0
+ubiquinol,1,0
+ulevostinib,1,0
+ulotaront,1,0
+valacyclovir,1,0
+valbenazine,1,0
+valproic acid,1,0
+vamorolone,1,0
+varenicline,1,0
+venlafaxine,1,0
+verdiperstat,1,0
+vicriviroc,1,0
+vigabatrin,1,0
+viltolarsen,1,0
+vinblastine,1,0
+vincristine,1,0
+vinflunine,1,0
+vinorelbine,1,0
+vitamin d,1,0
+vitamin e,1,0
+vorinostat,1,0
+warfarin,1,0
+wve-003,0,1
+xanamem,1,0
+yokukansan,1,0
+zagotenemab,1,0
+zelapar,1,0
+zilucoplan,1,0
+zolpidem,1,0
+zuranolone,1,0

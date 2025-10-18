@@ -743,7 +743,6 @@ master_df = master_df.drop_duplicates(subset="NCT Number", keep="first")
 #        CLEAN OTHER INTERVENTIONS               #
 ##################################################
 intervention_types = [
-    "Drug Interventions",
     "Device Interventions",
     "Behavioral Interventions",
     "Diagnostic Test Interventions",
@@ -753,7 +752,6 @@ intervention_types = [
 for col in intervention_types:
     master_df[col] = None
 for idx, interventions_list in master_df["Interventions"].items():
-    drug_names = []
     device_names = []
     behavioral_names = []
     diagnostic_tests = []
@@ -765,9 +763,7 @@ for idx, interventions_list in master_df["Interventions"].items():
 
     for intervention in interventions_list:
         intervention = intervention.strip().lower()
-        if intervention.startswith("drug: "):
-            drug_names.append(intervention[len("drug: "):].strip())
-        elif intervention.startswith("device: "):
+        if intervention.startswith("device: "):
             device_names.append(intervention[len("device: "):].strip())
         elif intervention.startswith("behavioral: "):
             behavioral_names.append(intervention[len("behavioral: "):].strip())
@@ -777,7 +773,6 @@ for idx, interventions_list in master_df["Interventions"].items():
             other_names.append(intervention[len("other: "):].strip())
         elif intervention.startswith("biological: "):
             biological_names.append(intervention[len("biological: "):].strip())
-    master_df.at[idx, "Drug Interventions"] = ", ".join(drug_names) if drug_names else None
     master_df.at[idx, "Device Interventions"] = ", ".join(device_names) if device_names else None
     master_df.at[idx, "Behavioral Interventions"] = ", ".join(behavioral_names) if behavioral_names else None
     master_df.at[idx, "Diagnostic Test Interventions"] = ", ".join(diagnostic_tests) if diagnostic_tests else None
@@ -785,27 +780,12 @@ for idx, interventions_list in master_df["Interventions"].items():
     master_df.at[idx, "Biological Interventions"] = ", ".join(biological_names) if biological_names else None
 
 
-drug_list = drug_inventory['substance_name'].dropna().str.lower().tolist()
-
-def standardize_drug_text(raw_text):
-    if pd.isna(raw_text):
-        return None
-    text = raw_text.lower()
-    found = []
-    for drug in drug_list:
-        # match full drug names within text
-        if re.search(rf'\b{re.escape(drug)}\b', text):
-            found.append(drug)
-    # join multiple matches, or keep "placebo" if it’s the only one
-    if not found and 'placebo' in text:
-        return 'placebo'
-    elif found:
-        return ', '.join(sorted(set(found)))
-    return None
 
 
-master_df['Drug Interventions Cleaned'] = master_df['Drug Interventions'].apply(standardize_drug_text)
-master_df = master_df[~master_df['Drug Interventions Cleaned'].eq('placebo')]
+
+
+
+
 
 
 ##################################################

@@ -5,6 +5,8 @@ import seaborn as sns
 import numpy as np
 import matplotlib.ticker as ticker  
 
+from collections import defaultdict
+
 #first set correct working directory
 from pathlib import Path
 
@@ -540,28 +542,60 @@ plt.show()
 #this will make dataset_drug_sets look like {"ALS" : {a, b, c}, "Alz" : {c, g, a}, etc...}
 disease_drug_relationship = {d.replace("disease: ", ""): set() for d in diseases}
 
-for disease in diseases: 
-    clean_name = disease.replace("disease: ", "")
+def parse_drugs(drug_str):
+    if pd.isna(drug_str) or drug_str == "[]" or drug_str.strip() == "":
+        return []
+    drug_str = drug_str.strip()
+    if drug_str.startswith("[") and drug_str.endswith("]"):
+        drug_str = drug_str[1:-1]
     
-    # subset rows where that disease == 1
-    subset = master_df[master_df[disease].astype(str) == "1"]
+    drugs = []
+    for item in drug_str.split(","):
+        cleaned_drug = item.strip().strip("'").strip('"')
+        if cleaned_drug != "":
+            drugs.append(cleaned_drug)
+    return drugs
+master_df['Drug Interventions Parsed'] = master_df['Drug Interventions'].apply(parse_drugs)
+disease_drug_relationship = {}
+
+for disease in diseases:
+    # Filter rows where the one-hot disease column == 1
+    disease_rows = master_df[master_df[disease] == 1]
     
-    # iterate through Drug Interventions column
-    for drug_entry in subset["Drug Interventions"]:
-        if pd.isna(drug_entry): 
-            continue
-        
-        # handle multiple drugs in one cell (e.g. "DrugA, DrugB")
-        for drug in str(drug_entry).split(","):
-            cleaned_drug = drug.strip().title()  # normalize formatting
-            if cleaned_drug:
-                disease_drug_relationship[clean_name].add(cleaned_drug)
+    all_drugs = set()
+    for drugs in disease_rows['Drug Interventions Parsed']:
+        all_drugs.update(drugs)
+    
+    disease_name = disease.replace("disease: ", "")
+    disease_drug_relationship[disease_name] = all_drugs
+
+# Print results
+for disease, drugs in disease_drug_relationship.items():
+    print(f"{disease}: {drugs}")
+
+
+
+#make an inversion of the disease-drug relationship
+drug_disease_relationship = defaultdict(set)  # drug -> set of diseases
+
+for disease, drugs in disease_drug_relationship.items():
+    for drug in drugs:
+        drug_disease_relationship[drug].add(disease)
+
+#filter drugs used in >1 disease and count diseases
+multi_disease_drugs = {drug: diseases for drug, diseases in drug_disease_relationship.items() if len(diseases) > 1}
+
+print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 
 
 
 
 
-#cycle through drugs over the years, frequency of how many studies they appeared in and for what disease (color-code diseases). 
+
+
+
+#cycle through drugs over the years, frequency of how many studies they appeared in and for what disease (color-code diseases)
+#check each drug individually to make sure that they are, in fact, drugs?
 
 
 
