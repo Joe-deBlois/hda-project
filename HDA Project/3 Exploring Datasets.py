@@ -7,11 +7,6 @@ import matplotlib.ticker as ticker
 
 from collections import defaultdict
 
-#look for how many trials contain more than one disease and contain at least one drug
-#look for how many trials contain more than one disease and drug? 
-#UMLS to find drug terminology
-#Disease-Disease network with drug connections
-
 
 #first set correct working directory
 from pathlib import Path
@@ -600,9 +595,33 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 
 
 
+
+
+########################################
+#   frequency of drugs over the years   #
+#########################################
 #cycle through drugs over the years, frequency of how many studies they appeared in and for what disease (color-code diseases)
-#check each drug individually to make sure that they are, in fact, drugs?
 
 
 
 
+
+
+
+
+
+#############################################
+#       save data for creating network      #
+#############################################
+
+#drug_disease_relationship rn is a nested dict. 
+#disease-drug relationships (check paper for how they saved this)
+
+#then save as a disease-disease relationship 
+# disease 1, disease 2, weight (defined as...?)
+
+
+#What do we want to save for the network? 
+# - drug_disease_relationship (type dataframe)
+# - master_df (type dataframe)
+# - drug_inventory (type dataframe)
