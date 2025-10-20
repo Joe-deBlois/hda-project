@@ -11,6 +11,10 @@ https://www.ncbi.nlm.nih.gov/research/pubtator3/docsum?text=@CHEMICAL_Warfarin%2
 UMLS: 
 https://www.nlm.nih.gov/research/umls/index.html
 
+NetworkX: 
+https://www.kaggle.com/code/alireza151/networkx-tutorial
+
+
 Next Steps: 
 - done ---1 consolidate all datasets, adding "DISEASE" as a label
 - done ---2 break up drugs, interventions, gender, age
