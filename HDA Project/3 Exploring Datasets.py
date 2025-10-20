@@ -601,6 +601,8 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 #   frequency of drugs over the years   #
 #########################################
 #cycle through drugs over the years, frequency of how many studies they appeared in and for what disease (color-code diseases)
+#different plots for the top 5 drugs, each line is the frequency of that drug per disease
+# x-axis = time, y-axis = # of studies, color = disease 
 
 
 
@@ -610,9 +612,9 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 
 
 
-#############################################
-#       save data for creating network      #
-#############################################
+#####################################################################
+#       normalize drug & disease names & save data for network      #
+#####################################################################
 
 #drug_disease_relationship rn is a nested dict. 
 #disease-drug relationships (check paper for how they saved this)
@@ -621,7 +623,11 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 # disease 1, disease 2, weight (defined as...?)
 
 
+#create a new drug inventory that includes "supplement" as a column, for only those drugs in drug_disease_relationship. Next, edit this to contain every synonoym/abbreviation for those terms in the "substance" section. 
+
+#create a disease inventory for all synonyms/abbreviations for the 13 diseases. 
+
 #What do we want to save for the network? 
-# - drug_disease_relationship (type dataframe)
-# - master_df (type dataframe)
+# - disease_disease_relationship (type dataframe)
+# - disease_inventory (type dataframe)
 # - drug_inventory (type dataframe)
