@@ -220,15 +220,28 @@ plt.show()
 #################################################################
 #   Average number of participants over all trials by disease:  # 
 #################################################################
-print("Average # of participants: ", math.ceil(master_df["Enrollment"].sum())/len(master_df["Enrollment"]))
+import math
 
-for disease in diseases: 
-    subset = master_df[master_df[disease].astype(str) == "1"]
+# Convert "Enrollment" to numeric (coerce errors to NaN)
+master_df["Enrollment"] = pd.to_numeric(master_df["Enrollment"], errors='coerce')
 
-    print(f"Average # of participants for {disease}: " + str(math.ceil((subset["Enrollment"].sum())/len(subset["Enrollment"]))))
-  
+# Drop rows where Enrollment is NaN
+valid_enrollment = master_df["Enrollment"].dropna()
 
+# Overall average
+overall_avg = math.ceil(valid_enrollment.mean())
+print(f"Average # of participants: {overall_avg}")
 
+for disease in diseases:
+    subset = master_df[(master_df[disease].astype(str) == "1")].copy()
+    
+    # Convert Enrollment in subset to numeric and drop NaNs
+    subset["Enrollment"] = pd.to_numeric(subset["Enrollment"], errors='coerce')
+    subset_valid = subset["Enrollment"].dropna()
+    
+    if len(subset_valid) > 0:
+        avg = math.ceil(subset_valid.mean())
+        print(f"Average # of participants for {disease}: {avg}")
 
 
 
@@ -602,7 +615,7 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 #########################################
 #cycle through drugs over the years, frequency of how many studies they appeared in and for what disease (color-code diseases)
 #different plots for the top 5 drugs, each line is the frequency of that drug per disease
-# x-axis = time, y-axis = # of studies, color = disease 
+# x-axis = time, y-axis = # of studies, color = disease ; maybe different plots for each disease? like top 5 drugs for each disease? and then top 5 shared? 
 
 
 
@@ -717,115 +730,110 @@ ddn_drug_inventory["drug"] = ddn_drug_inventory.apply(
     axis=1
 )
 
+#drug synoyms and MeSH codes
 drug_synonyms_dict = synonyms_dict = {
-    "acetaminophen": ["acetaminophen", "paracetamol", "tylenol"],
-    "acetylcysteine": ["acetylcysteine", "n-acetylcysteine", "nac", "mucomyst"],
-    "alprazolam": ["alprazolam", "xanax"],
-    "amantadine": ["amantadine", "symmetrel"],
-    "armodafinil": ["armodafinil", "nuvigil"],
-    "atomoxetine": ["atomoxetine", "strattera"],
-    "citalopram": ["citalopram", "celexa"],
-    "coenzyme q10": ["coenzyme q10", "coq10", "ubiquinone"],
-    "creatine": ["creatine"],
-    "curcumin": ["curcumin", "turmeric extract", "curcuma longa"],
-    "cyclophosphamide": ["cyclophosphamide", "cytoxan"],
-    "dexamethasone": ["dexamethasone", "decadron"],
-    "dextromethorphan": ["dextromethorphan", "dxm"],
-    "docosahexaenoic acid": ["docosahexaenoic acid", "dha", "omega-3 fatty acid"],
-    "donepezil": ["donepezil", "aricept"],
-    "duloxetine": ["duloxetine", "cymbalta"],
-    "escitalopram": ["escitalopram", "lexapro"],
-    "filgrastim": ["filgrastim", "neupogen"],
-    "fingolimod": ["fingolimod", "gilenya"],
-    "glatiramer acetate": ["glatiramer acetate", "copaxone"],
-    "hydrocodoneapap": ["hydrocodone apap", "vicodin", "norco"],
-    "ibudilast": ["ibudilast"],
-    "icosapent ethyl": ["icosapent ethyl", "vascepa"],
-    "immunoglobulin": ["immunoglobulin", "ivig"],
-    "inosine": ["inosine"],
-    "insulin": ["insulin"],
-    "lipoic acid": ["lipoic acid", "alpha lipoic acid", "ala"],
-    "lithium": ["lithium"],
-    "lithium carbonate": ["lithium carbonate"],
-    "memantine": ["memantine", "namenda"],
-    "metformin": ["metformin", "glucophage"],
-    "methylphenidate": ["methylphenidate", "ritalin", "concerta"],
-    "midazolam": ["midazolam", "versed"],
-    "minocycline": ["minocycline"],
-    "modafinil": ["modafinil", "provigil"],
-    "montelukast": ["montelukast", "singulair"],
-    "mycophenolate mofetil": ["mycophenolate mofetil", "cellcept"],
-    "omega-3 fatty acids": ["omega-3 fatty acids", "fish oil", "epa", "dha"],
-    "oxaloacetate": ["oxaloacetate"],
-    "paracetamol": ["paracetamol", "acetaminophen", "tylenol"],
-    "pramipexole": ["pramipexole", "mirapex"],
-    "prednisone": ["prednisone"],
-    "quinidine": ["quinidine"],
-    "ramipril": ["ramipril", "altace"],
-    "rasagiline": ["rasagiline", "azilect"],
-    "rifaximin": ["rifaximin", "xifaxan"],
-    "riluzole": ["riluzole", "rilutek"],
-    "rivastigmine": ["rivastigmine", "exelon"],
-    "simvastatin": ["simvastatin", "zocor"],
-    "sirolimus": ["sirolimus", "rapamune"],
-    "solifenacin": ["solifenacin", "vesicare"],
-    "tauroursodeoxycholic acid": ["tauroursodeoxycholic acid", "tudca"],
-    "telmisartan": ["telmisartan", "micardis"],
-    "triheptanoin": ["triheptanoin"],
-    "valproic acid": ["valproic acid", "depakote", "divalproex"],
-    "varenicline": ["varenicline", "chantix"],
-    "venlafaxine": ["venlafaxine", "effexor"],
-    "vitamin d": ["vitamin d", "cholecalciferol", "ergocalciferol"],
-    "warfarin": ["warfarin", "coumadin"],
-    "zolpidem": ["zolpidem", "ambien"],
-    "acetaminophen": ["acetaminophen", "paracetamol", "tylenol"],
-    "ampreloxetine": ["ampreloxetine"],
-    "arimoclomol": ["arimoclomol"],
+    "acetaminophen": ["acetaminophen", "paracetamol", "tylenol", "D000082"],
+    "acetylcysteine": ["acetylcysteine", "n-acetylcysteine", "nac", "mucomyst", "D000111", "C487056"],
+    "alprazolam": ["alprazolam", "xanax", "D000525"],
+    "amantadine": ["amantadine", "symmetrel", "amantadine hydrochloride", "D000547"],
+    "armodafinil": ["armodafinil", "nuvigil", "D000077408"],
+    "atomoxetine": ["atomoxetine", "strattera", "atomoxetine hydrochloride", "D000069445", "C0076823"],
+    "citalopram": ["citalopram", "celexa", "D015283"],
+    "coenzyme q10": ["coenzyme q10", "coq10", "ubiquinone", "ubiquinone-10", "C024989", "C026663"],
+    "creatine": ["creatine", "D003401"],
+    "curcumin": ["curcumin", "turmeric extract", "curcuma longa", "D003474"],
+    "cyclophosphamide": ["cyclophosphamide", "cytoxan", "D003520"],
+    "dexamethasone": ["dexamethasone", "decadron", "D003907"],
+    "dextromethorphan": ["dextromethorphan", "dxm", "D003915"],
+    "donepezil": ["donepezil", "aricept", "D000077265"],
+    "duloxetine": ["duloxetine", "cymbalta", " D000068736"],
+    "escitalopram": ["escitalopram", "lexapro", "D000089983"],
+    "filgrastim": ["filgrastim", "neupogen", "D000069585"],
+    "fingolimod": ["fingolimod", "gilenya", " D000068876", "fingolimod hydrochloride"],
+    "glatiramer acetate": ["glatiramer acetate", "copaxone", "D000068717"],
+    "hydrocodoneapap": ["hydrocodone apap", "vicodin", "norco", "C083640", "acetaminophin + hydrocone", "anexsia", "co-gesic", "lorcet", "lortab", "norco", "zydone"],
+    "ibudilast": ["ibudilast", "C038366"],
+    "icosapent ethyl": ["icosapent ethyl", "vascepa", "epadiolex", "C035276"],
+    "immunoglobulin": ["immunoglobulin", "ivig", "D007136"],
+    "inosine": ["inosine", "D007288"],
+    "insulin": ["insulin", "D007328"],
+    "lipoic acid": ["lipoic acid", "alpha lipoic acid", "ala", "thioctic acid", "D008063"],
+    "lithium": ["lithium", "D008094"],
+    "lithium carbonate": ["lithium carbonate", "D016651"],
+    "memantine": ["memantine", "namenda", " D008559"],
+    "metformin": ["metformin", "glucophage", "D008687"],
+    "methylphenidate": ["methylphenidate", "ritalin", "concerta", "D008774"],
+    "midazolam": ["midazolam", "versed", "D008874"],
+    "minocycline": ["minocycline", "D008911"],
+    "modafinil": ["modafinil", "provigil", "D000077408"],
+    "montelukast": ["montelukast", "singulair", "C093875"],
+    "mycophenolate mofetil": ["mycophenolate mofetil", "cellcept", "D009173"],
+    "omega-3 fatty acids": ["omega-3 fatty acids", "fish oil", "epa", "dha", "D015525", "docosahexaenoic acid", "D004281"],
+    "oxaloacetate": ["oxaloacetate", "D062907"],
+    "paracetamol": ["paracetamol", "acetaminophen", "tylenol", "D000082"],
+    "pramipexole": ["pramipexole", "mirapex",  "D000077487"],
+    "prednisone": ["prednisone", "D011241"],
+    "quinidine": ["quinidine", "D011802"],
+    "ramipril": ["ramipril", "altace", "D017257"],
+    "rasagiline": ["rasagiline", "azilect", "C031967"],
+    "rifaximin": ["rifaximin", "xifaxan", "D000078262"],
+    "riluzole": ["riluzole", "rilutek", "D019782"],
+    "rivastigmine": ["rivastigmine", "exelon", "D000068836"],
+    "simvastatin": ["simvastatin", "zocor", "D019821"],
+    "sirolimus": ["sirolimus", "rapamune", "D020123"],
+    "solifenacin": ["solifenacin", "vesicare", "D000069464", "solifenacin succinate"],
+    "tauroursodeoxycholic acid": ["tauroursodeoxycholic acid", "tudca", "ursodoxicoltaurine", "C031655"],
+    "telmisartan": ["telmisartan", "micardis", "D000077333"],
+    "triheptanoin": ["triheptanoin", "C531010"],
+    "valproic acid": ["valproic acid", "depakote", "divalproex", "D014635"],
+    "varenicline": ["varenicline", "chantix", "D00006858"],
+    "venlafaxine": ["venlafaxine", "effexor", " D000069470"],
+    "vitamin d": ["vitamin d", "cholecalciferol", "ergocalciferol", "D004872", "D002762", " D014807"],
+    "warfarin": ["warfarin", "coumadin", "D014859"],
+    "zolpidem": ["zolpidem", "ambien", "D000077334"],
+    "ampreloxetine": ["ampreloxetine", "C000601820"],
+    "arimoclomol": ["arimoclomol", "C486387"],
     "auto-m-bfs": ["auto-m-bfs"],
     "avp-923": ["avp-923"],
     "azd": ["azd"],
-    "buntanetapposiphen": ["buntanetapposiphen"],
-    "busulfan cyclophosphamide antithymocyte globulin": ["busulfan cyclophosphamide antithymocyte globulin"],
-    "cilostazol": ["cilostazol", "pletal"],
-    "circadin": ["circadin"],
-    "ck-2017357": ["ck-2017357"],
-    "datscan ioflupane": ["datscan ioflupane"],
-    "dimebon": ["dimebon"],
-    "droxidopa": ["droxidopa", "northera"],
-    "filgrastim": ["filgrastim", "neupogen"],
-    "florbetapir": ["florbetapir"],
-    "flortaucipir f": ["flortaucipir f"],
-    "flutemetamol": ["flutemetamol"],
-    "ibudilast": ["ibudilast"],
-    "incobotulinum toxin a": ["incobotulinum toxin a", "xeomin"],
-    "intepirdine": ["intepirdine"],
-    "interferon": ["interferon", "avonex", "betaseron", "rebif"],
-    "ionis maptrx": ["ionis maptrx"],
-    "ipx": ["ipx"],
-    "isosorbide mononitrate": ["isosorbide mononitrate", "ismn"],
-    "laquinimod": ["laquinimod"],
-    "lubiprostone": ["lubiprostone", "amitiza"],
-    "melphalan": ["melphalan"],
-    "montelukast": ["montelukast", "singulair"],
+    "melatonin" : ["melatonin", "circadin", "D008550"],
+    "buntanetapposiphen": ["buntanetapposiphen", "buntanetap", "posiphen", "ANVS-401"],
+    "busulfan cyclophosphamide antithymocyte globulin": ["busulfan cyclophosphamide antithymocyte globulin", "ATG"],
+    "cilostazol": ["cilostazol", "pletal", "D000077407"],
+    "ck-2017357": ["ck-2017357", "C572767", "tirasemtiv"],
+    "latrepirdine": ["dimebon", "C010119" ],
+    "droxidopa": ["droxidopa", "northera", "D015103"],
+    "ibudilast": ["ibudilast", "C038366"],
+    "incobotulinum toxin a": ["incobotulinum toxin a", "xeomin", "C545476", "botulinum neurotoxin type a", "bont/a", "bont-a"],
+    "intepirdine": ["intepirdine", "rvt-101", "sb-742457"],
+    "interferon": ["interferon", "avonex", "betaseron", "rebif", "interferon beta-1a", "D000068556", "D000068576", "interferon beta-1b"],
+    "ionis maptrx": ["ionis maptrx", "biib080", "ionis-maptrx"],
+    "ipx203": ["ipx", "ipx203"],
+    "isosorbide mononitrate": ["isosorbide mononitrate", "ismn", " C030397"],
+    "laquinimod": ["laquinimod", "C476223"],
+    "lubiprostone": ["lubiprostone", "amitiza", "D000068238"],
+    "melphalan": ["melphalan", " D008558"],
+    "montelukast": ["montelukast", "singulair", "C093875"],
     "mt-1186": ["mt-1186"],
-    "myobloc": ["myobloc"],
+    "botulinum toxin type b": ["myobloc", "botulinum toxin type B", "rimabotulinumtoxinb", "C096323"],
     "neflamapimod": ["neflamapimod"],
-    "nelotanserin": ["nelotanserin"],
-    "nuedexta": ["nuedexta"],
-    "onabotulinumtoxin a": ["onabotulinumtoxin a", "botox"],
-    "pimavanserin": ["pimavanserin"],
+    "nelotanserin": ["nelotanserin", "C546600"],
+    "nuedexta": ["nuedexta", "dextromethorphan hydrobromide and quinidine sulfate", "avp-923", "dxm/quinidine"],
+    "onabotulinumtoxin a": ["onabotulinumtoxin a", "botox", "vistabel", "vistabex","D019274"],
+    "pimavanserin": ["pimavanserin", "C510793", "nuplazid"],
     "posiphen": ["posiphen"],
-    "pridopidine": ["pridopidine"],
-    "reldesemtiv": ["reldesemtiv"],
-    "safinamide": ["safinamide"],
+    "pridopidine": ["pridopidine", "C483720", "huntexil", "acr16"],
+    "reldesemtiv": ["reldesemtiv", "C000722562", "ck-2127107"],
+    "safinamide": ["safinamide", "C092797", "xadago"],
     "sage-718": ["sage-718"],
-    "scopolamine": ["scopolamine"],
-    "suvorexant": ["suvorexant", "belsomra"],
-    "tirasemtiv": ["tirasemtiv"],
+    "scopolamine": ["scopolamine", "hyoscine", " D012601"],
+    "suvorexant": ["suvorexant", "belsomra", "C551624"],
+    "tirasemtiv": ["tirasemtiv", "CK-2017357", "C572767"],
     "verdiperstat": ["verdiperstat"],
-    "yokukansan": ["yokukansan"]
+    "yokukansan": ["yokukansan", "yi-gan san", "C524644", "yokukan-san"]
 }
 
+###FIX THIS MERGING PART!!!
 
 drug_synonym_to_canonical = {}
 for canonical, synonyms in drug_synonyms_dict.items():
@@ -835,15 +843,14 @@ for canonical, synonyms in drug_synonyms_dict.items():
 data = [(syn, canonical) for syn, canonical in drug_synonym_to_canonical.items()]
 synonyms_df = pd.DataFrame(data, columns=["synonym", "substance_name"])
 
-ddn_drug_inventory["substance_name_lower"] = ddn_drug_inventory["substance_name"].str.lower()
-synonyms_df["synonym_lower"] = synonyms_df["synonym"].str.lower()
+ddn_drug_inventory["substance_name"] = ddn_drug_inventory["substance_name"]
 
 # Merge 
-merged_df = pd.merge(
+ddn_drug_inventory = pd.merge(
     synonyms_df,
     ddn_drug_inventory,
-    left_on="synonym_lower",
-    right_on="substance_name_lower",
+    left_on="synonym",
+    right_on="substance_name",
     how="left",
     suffixes=('_syn', '_orig')
 )
@@ -852,7 +859,7 @@ merged_df = pd.merge(
 
 
 
-
+#note: collapse docosahexaenoic acid into omega-3 fatty acids 
 
 
 
@@ -860,7 +867,7 @@ merged_df = pd.merge(
 
 #What do we want to save for the network? 
 # - disease_disease_relationship (type dataframe)
-disease_disease_network.to_csv("CT_DDN.csv", index=False)  
+#disease_disease_network.to_csv("CT_DDN.csv", index=False)  
 # - edited disease_inventory (type dataframe)
 # - edited drug_inventory (type dataframe)
 # - diseases not related through the DDN: difference_df_1_minus_2

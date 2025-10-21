@@ -198,13 +198,17 @@ print(f"Number of empty rows in Drug Interventions column before manual cleaning
 print("\nThe next step in the drug intervention cleaning is to accept only drug codes, drug code candidates, and drugs (including supplements). This omits imaging agents, tracers, and other non-drug strings")
 
 #now go through what's left manually
-delete = ["standard of care", "discontinuation", "11c-er", "11c-pbr", "11c-pib", "11cmk-6884", "11cpei", "18f flutemetamol", "18f-flutemetamol", "18fflutemetamol", "18f-av-1451", "18fav-1451", "18f-dtbz av-133", "18f-fdg", "18f-florbetaben", "18f-mk-6240", "18fmk-6240mbq", "18fflorbetapir pet imaging", "18fgtp", "18fmk-3328", "3ka-apc protein", "acr", "active comparator", "ain", "akst", "al", "alks", "all subjects", "amdxp", "amx", "androgen deprivation therapy adt", "antihistamine", "antiparkinsonian agent s", "atm fog in pd", "auto-m-bfs", "autonomic testing on", "bac treatment", "baf", "baseline disease modifying therapies dmts", "bg", "bgdmf", "bi", "bi25 mg", "bi50mg", "bidose", "biib", "bpn", "bym", "cct", "chf1x", "chf2x", "chf3x", "cholinesterase inhibitor", "cle", "cnp", "control", "cor", "corticosteroid", "cpib", "ct", "cvn", "cvnhigh dose", "cvnlow dose", "cystoscopic of botox into the urinary bladder", "disease modifying therapy", "dose", "e", "egb", "elnd", "ena", "endothelin receptor antagonists", "fab", "fdc blue", "gaml", "general anesthesia with isoflurane", "glpg", "gold nanocrystals", "grf", "gsk", "gsk25 mg tablet", "gskb", "gwp-p", "gz", "ib", "idmt", "incb", "infusion", "infusions of young plasma", "intensive control of sbp","ir cd-ld", "lka", "locally approved contrast medium for contrast enhanced magnetic resonance imaging mri", "lps", "lu ae", "lunasin regimen", "ly", "ly- iv", "ly- sc", "matched vehicle", "mesenchymal stem cells", "mk", "nd", "neod", "nt", "ocr", "off levodopa", "opc", "optimal drug therapy", "optimized antiparkinsonian treatment", "optimized medical treatment", "other parkinsons disease treatments", "pbt", "pdeinhibitor", "proiv", "prosc", "prospekta", "rad", "rnf", "rns", "ro", "rop", "rorg", "rpc", "rphbotanical drug product", "sar", "sparchigh dose", "sparclow dose", "spm", "srx", "standard control of sbp", "standard ms dmt", "standard ms dmts", "standard treatment with a conventional drug", "sti", "study drug", "syn", "tb", "thndosage a", "thndosage b", "thndosage c", "tissue selective estrogen complex", "trx16 mgday", "trx8 mgday", "ucb-j", "cystoscopic of botox into the urinary bladder", "discontinuation of disease modifying therapy", "locally approved contrast medium for contrast enhanced magnetic resonance imaging mri", "methylene blue", "sham discontinuation", "folfiri", "mfolfox", "ne", "bi50 mg"]
+delete = ["standard of care", "discontinuation", "11c-er", "11c-pbr", "11c-pib", "11cmk-6884", "11cpei", "18f flutemetamol", "flutemetamol",  "18f-flutemetamol", "18fflutemetamol", "18f-av-1451", "18fav-1451", "18f-dtbz av-133", "18f-fdg", "18f-florbetaben", "18f-mk-6240", "18fmk-6240mbq", "flortauripir", "18fflorbetapir pet imaging", "18fgtp", "18fmk-3328", "3ka-apc protein", "acr", "active comparator", "ain", "akst", "al", "alks", "all subjects", "amdxp", "amx", "androgen deprivation therapy adt", "antihistamine", "antiparkinsonian agent s", "atm fog in pd", "auto-m-bfs", "autonomic testing on", "bac treatment", "baf", "baseline disease modifying therapies dmts", "bg", "bgdmf", "bi", "bi25 mg", "bi50mg", "bidose", "biib", "bpn", "bym", "cct", "chf1x", "chf2x", "chf3x", "cholinesterase inhibitor", "cle", "cnp", "control", "cor", "corticosteroid", "cpib", "ct", "cvn", "cvnhigh dose", "cvnlow dose", "cystoscopic of botox into the urinary bladder", "disease modifying therapy", "dose", "e", "egb", "elnd", "ena", "endothelin receptor antagonists", "fab", "fdc blue", "gaml", "general anesthesia with isoflurane", "glpg", "gold nanocrystals", "grf", "gsk", "gsk25 mg tablet", "gskb", "gwp-p", "gz", "ib", "idmt", "incb", "infusion", "infusions of young plasma", "intensive control of sbp","ir cd-ld", "lka", "locally approved contrast medium for contrast enhanced magnetic resonance imaging mri", "lps", "lu ae", "lunasin regimen", "ly", "ly- iv", "ly- sc", "matched vehicle", "mesenchymal stem cells", "mk", "nd", "neod", "nt", "ocr", "off levodopa", "opc", "optimal drug therapy", "optimized antiparkinsonian treatment", "optimized medical treatment", "other parkinsons disease treatments", "pbt", "pdeinhibitor", "proiv", "prosc", "prospekta", "rad", "rnf", "rns", "ro", "rop", "rorg", "rpc", "rphbotanical drug product", "sar", "sparchigh dose", "sparclow dose", "spm", "srx", "standard control of sbp", "standard ms dmt", "standard ms dmts", "standard treatment with a conventional drug", "sti", "study drug", "syn", "tb", "thndosage a", "thndosage b", "thndosage c", "tissue selective estrogen complex", "trx16 mgday", "trx8 mgday", "ucb-j", "cystoscopic of botox into the urinary bladder", "discontinuation of disease modifying therapy", "locally approved contrast medium for contrast enhanced magnetic resonance imaging mri", "methylene blue", "sham discontinuation", "folfiri", "mfolfox", "ne", "bi50 mg", "datscan ioflupanei", "datscan ioflupane"]
 def manual_filtering(drug_list):
     clean_list = []
     for d in drug_list:
         #make sure this matches EXACT terms in delete, not "term in d"
         if d in delete or "contrast enhanced magnetic" in d or "botox into the" in d or "active treatment" in d or "infusion" in d: 
             continue
+        elif d == "dimebon": 
+            clean_list.append("latrepirdine")
+        elif d == "circadin":
+            clean_list.append("melatonin")
         elif d == "cisplatinm":
             clean_list.append("cisplatin")
         elif "suvorexant" in d: 
@@ -325,6 +329,8 @@ def manual_filtering(drug_list):
             clean_list.append("interferon beta-1a")
         elif "rasagiline" in d: 
             clean_list.append("rasagiline")
+        elif d == "myobloc":
+            clean_list.append("botulinum toxin type B")
         elif d == "rapamune" or d == "rapamycin":
             clean_list.append("sirolimus")
         elif "pramipexole" in d: 
@@ -420,7 +426,7 @@ def manual_filtering(drug_list):
         elif "ifn betaa tiw" in d: 
             clean_list.append("interferon beta")
         elif "icosapent ethyl" in d: 
-            clean_list.append("icosapent ethyl")
+            clean_list.append("melatonin")
         elif "gocovri" in d: 
             clean_list.append("gocovri")
         elif "glatiramer acetate" in d: 
@@ -431,8 +437,6 @@ def manual_filtering(drug_list):
             clean_list.append("filgrastim")
         elif d == "fty": 
             clean_list.append("fingolimod")
-        elif "flutemetamol" in d: 
-            clean_list.append("flutemetamol")
         elif "fluorouracil" in d: 
             clean_list.append("fluorouracil")
         elif "florbetapir" in d: 
@@ -474,7 +478,7 @@ def manual_filtering(drug_list):
         elif "donepezil" in d: 
             clean_list.append("donepezil")
         elif "docosahexaenoic acid" in d: 
-            clean_list.append("docosahexaenoic acid")
+            clean_list.append("omega-3 fatty acids")
         elif d == "dl-alpha-tocopherol":
             clean_list.append("vitamin e")
         elif "diclofenac" in d: 
@@ -485,8 +489,6 @@ def manual_filtering(drug_list):
             clean_list.append("dextromethorphan")
         elif "dexpramipexole" in d: 
             clean_list.append("dexpramipexole")
-        elif d == "datscan ioflupanei": 
-            clean_list.append("datscan ioflupane")
         elif "dantrolene" in d: 
             clean_list.append("dantrolene")
         elif "dalfampridine" in d: 

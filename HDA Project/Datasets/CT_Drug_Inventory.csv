@@ -53,6 +53,7 @@ binimetinib,1,0
 bleomycin,1,0
 bms-984923,0,1
 bortezomib,1,0
+botulinum toxin type B,1,0
 branaplam,1,0
 brexpiprazole,1,0
 bryostatin,1,0
@@ -81,7 +82,6 @@ cerebrolysin,1,0
 cetrizine,1,0
 chemotherapy,1,0
 cilostazol,1,0
-circadin,1,0
 cisplatin,1,0
 citalopram,1,0
 ck-2017357,0,1
@@ -112,7 +112,6 @@ daridorexant,1,0
 darunavir,1,0
 dasatinib,1,0
 dasatinib quercetin,1,0
-datscan ioflupane,1,0
 deferiprone,1,0
 definity,1,0
 deflazacort,1,0
@@ -120,12 +119,10 @@ dexamethasone,1,0
 dexmedetomidine,1,0
 dextromethorphan,1,0
 diclofenac,1,0
-dimebon,1,0
 dimethyl fumarate,1,0
 diphenhydramine,1,0
 dm-1992,0,1
 docetaxel,1,0
-docosahexaenoic acid,1,0
 dolutegravir,1,0
 donanemab,1,0
 donepezil,1,0
@@ -164,7 +161,7 @@ florbetaben,1,0
 florbetapir,1,0
 flortaucipir f,1,0
 fluorouracil,1,0
-flutemetamol,1,0
+flutemetamolf,1,0
 fluticasone,1,0
 fx-1006a,0,1
 gadoteridol,1,0
@@ -179,7 +176,6 @@ gs-248,0,1
 ht-1001,0,1
 hydrocodoneapap,1,0
 ibudilast,1,0
-icosapent ethyl,1,0
 idalopirdine,1,0
 idazoxan,1,0
 idebenone,1,0
@@ -214,6 +210,7 @@ l-arginine,1,0
 ladostigil hemitartrate,1,0
 lamivudine,1,0
 laquinimod,1,0
+latrepirdine,1,0
 lemborexant,1,0
 lenvatinib,1,0
 leucovorin,1,0
@@ -262,7 +259,6 @@ moxifloxacin,1,0
 msdc-0160,0,1
 mt-1186,0,1
 mycophenolate mofetil,1,0
-myobloc,1,0
 nabilone,1,0
 nabiximols,1,0
 naltrexone,1,0

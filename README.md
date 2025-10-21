@@ -9,7 +9,7 @@ PubTator example (for finding drugs and diseases on pubmed?):
 https://www.ncbi.nlm.nih.gov/research/pubtator3/docsum?text=@CHEMICAL_Warfarin%20
 
 UMLS: 
-https://www.nlm.nih.gov/research/umls/index.html
+https://uts.nlm.nih.gov/uts/umls/home?_gl=1*i9kq1k*_ga*MTA2NDQ3MzMzNy4xNzQxMjc0MjEw*_ga_P1FPTH9PL4*czE3NjEwNzI2ODIkbzUkZzEkdDE3NjEwNzI3OTEkajIxJGwwJGgw*_ga_7147EPK006*czE3NjEwNzI2ODIkbzYkZzEkdDE3NjEwNzI3OTEkajIxJGwwJGgw
 
 NetworkX: 
 https://www.kaggle.com/code/alireza151/networkx-tutorial
