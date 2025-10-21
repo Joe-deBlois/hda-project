@@ -616,18 +616,96 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 #       normalize drug & disease names & save data for network      #
 #####################################################################
 
-#drug_disease_relationship rn is a nested dict. 
-#disease-drug relationships (check paper for how they saved this)
+#all drugs that are tested on >1 disease are the keys in multi_disease_drugs
+
+#DISEASE-DRUG RELATIONSHIP
+#df with columns o1 = "Drug", o2 = "Disease", weight = "Num Trials"
+
+rows = []
+for disease in diseases: 
+    disease_name = disease.replace("disease: ", "")
+
+    #subset of the trials for the disease
+    subset = master_df[master_df[disease] == 1]
+
+    #flatten all drug mentions for these trials
+    drug_counts = defaultdict(int)
+    for drugs in subset["Drug Interventions Parsed"]:
+        for drug in drugs: 
+            drug_counts[drug] += 1
+    #add each drug-disease pair to the list
+    for drug, count in drug_counts.items():
+        rows.append({"Disease": disease_name, "Drug": drug, "Weight": count})
+drug_disease_network = pd.DataFrame(rows)
+
+print(drug_disease_network["Weight"].value_counts().sort_index())
 
 #then save as a disease-disease relationship 
-# disease 1, disease 2, weight (defined as...?)
+# disease 1, disease 2, weight (number of drugs tested at least once on both diseases)
 
+#add a column for what those drugs are
+rows = []
+disease_names = list(disease_drug_relationship.keys())
 
-#create a new drug inventory that includes "supplement" as a column, for only those drugs in drug_disease_relationship. Next, edit this to contain every synonoym/abbreviation for those terms in the "substance" section. 
+for i in range(len(disease_names)):
+    for j in range(i + 1, len(disease_names)):
+        d1 = disease_names[i]
+        d2 = disease_names[j]
+        shared_drugs = disease_drug_relationship[d1].intersection(disease_drug_relationship[d2])
+        weight = len(shared_drugs)
+        
+        if weight > 0:
+            rows.append({
+                "Disease 1": d1,
+                "Disease 2": d2,
+                "Weight": weight, 
+                "Drugs": list(shared_drugs)
+            })
+
+disease_disease_network = pd.DataFrame(rows)
+print(disease_disease_network.head())
+
+#all possible disease pairs
+pairs = []
+for i in range(len(diseases)):
+    disease_name1 = diseases[i].replace("disease: ", "")
+    for j in range(i + 1, len(diseases)):
+        disease_name2 = diseases[j].replace("disease: ", "")
+        pairs.append([disease_name1, disease_name2])
+pairs_df = pd.DataFrame(pairs, columns=['Disease 1', 'Disease 2'])
+            
+#which ones are not found in our network? 
+merged = pairs_df.merge(
+    disease_disease_network[['Disease 1', 'Disease 2']],
+    on=['Disease 1', 'Disease 2'],
+    how='left',
+    indicator=True
+)
+
+difference_df_1_minus_2 = merged[merged['_merge'] == 'left_only'][['Disease 1', 'Disease 2']].reset_index(drop=True)
+print("\nPairs missing from disease_disease_network:\n", difference_df_1_minus_2)
+
+#how many are different? 
+print((len(pairs) - len(disease_disease_network)) == len(difference_df_1_minus_2))
+
+#create a new drug inventory that includes "supplement" as a column, for only those drugs in disease_disease_relationship. Next, edit this to contain every synonoym/abbreviation for those terms in the "substance" section. 
+multi_disease_drug_names = list(multi_disease_drugs.keys())
+ddn_drug_inventory = pd.DataFrame(columns=drug_inventory.columns)
+
+for index, row in drug_inventory.iterrows():
+    if row["substance_name"] in multi_disease_drug_names:
+        ddn_drug_inventory.loc[len(ddn_drug_inventory)] = row
+ddn_drug_inventory['supplmenet'] = ddn_drug_inventory['supplement'].apply(lambda x: 1 
+                                          if x ==  10 
+                                          or x == 
+                                          ...)
 
 #create a disease inventory for all synonyms/abbreviations for the 13 diseases. 
 
 #What do we want to save for the network? 
 # - disease_disease_relationship (type dataframe)
-# - disease_inventory (type dataframe)
-# - drug_inventory (type dataframe)
+disease_disease_network.to_csv("CT_DDN.csv", index=False)  
+# - edited disease_inventory (type dataframe)
+# - edited drug_inventory (type dataframe)
+# - diseases not related through the DDN: difference_df_1_minus_2
+difference_df_1_minus_2.to_csv("disease_pairs_not_in_ddn.csv", index=False)  
