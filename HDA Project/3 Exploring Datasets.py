@@ -612,13 +612,10 @@ print(f"{len(multi_disease_drugs)} drugs were tested on >1 disease")
 
 
 
-#####################################################################
-#       normalize drug & disease names & save data for network      #
-#####################################################################
 
-#all drugs that are tested on >1 disease are the keys in multi_disease_drugs
-
-#DISEASE-DRUG RELATIONSHIP
+#############################################################
+#                   RELATIONSHIP NETWORKS                   #
+#############################################################
 #df with columns o1 = "Drug", o2 = "Disease", weight = "Num Trials"
 
 rows = []
@@ -688,17 +685,176 @@ print("\nPairs missing from disease_disease_network:\n", difference_df_1_minus_2
 #how many are different? 
 print((len(pairs) - len(disease_disease_network)) == len(difference_df_1_minus_2))
 
+
+
+
+
+
+
+
+##########################################################
+#         NEW DRUG INVENTORY FOR NORMALIZATION           #
+##########################################################
 #create a new drug inventory that includes "supplement" as a column, for only those drugs in disease_disease_relationship. Next, edit this to contain every synonoym/abbreviation for those terms in the "substance" section. 
+
 multi_disease_drug_names = list(multi_disease_drugs.keys())
 ddn_drug_inventory = pd.DataFrame(columns=drug_inventory.columns)
 
-for index, row in drug_inventory.iterrows():
-    if row["substance_name"] in multi_disease_drug_names:
-        ddn_drug_inventory.loc[len(ddn_drug_inventory)] = row
-ddn_drug_inventory['supplmenet'] = ddn_drug_inventory['supplement'].apply(lambda x: 1 
-                                          if x ==  10 
-                                          or x == 
-                                          ...)
+supplements = ['coenzyme q10', 'creatine', 'curcumin', 'docosahexaenoic acid', 'inosine', 'lipoic acid', 'omega-3 fatty acids','oxaloacetate', 'tauroursodeoxycholic acid', 'triheptanoin', 'vitamin d','yokukansan']
+ddn_drug_inventory = drug_inventory[drug_inventory["substance_name"].isin(multi_disease_drug_names)].copy()
+#add supplement column: 
+ddn_drug_inventory["supplement"] = ddn_drug_inventory["substance_name"].apply(
+    lambda x: 1 if x in supplements else 0
+)
+#adjust drug column for supplements (if supp, then not drug)
+ddn_drug_inventory["drug"] = ddn_drug_inventory["substance_name"].apply(
+    lambda x: 0 if x in supplements else 1
+)
+
+#adjust drug column for potential_drug_codes
+ddn_drug_inventory["drug"] = ddn_drug_inventory.apply(
+    lambda row: 0 if row["potential_drug_code"] == 1 else row["drug"],
+    axis=1
+)
+
+drug_synonyms_dict = synonyms_dict = {
+    "acetaminophen": ["acetaminophen", "paracetamol", "tylenol"],
+    "acetylcysteine": ["acetylcysteine", "n-acetylcysteine", "nac", "mucomyst"],
+    "alprazolam": ["alprazolam", "xanax"],
+    "amantadine": ["amantadine", "symmetrel"],
+    "armodafinil": ["armodafinil", "nuvigil"],
+    "atomoxetine": ["atomoxetine", "strattera"],
+    "citalopram": ["citalopram", "celexa"],
+    "coenzyme q10": ["coenzyme q10", "coq10", "ubiquinone"],
+    "creatine": ["creatine"],
+    "curcumin": ["curcumin", "turmeric extract", "curcuma longa"],
+    "cyclophosphamide": ["cyclophosphamide", "cytoxan"],
+    "dexamethasone": ["dexamethasone", "decadron"],
+    "dextromethorphan": ["dextromethorphan", "dxm"],
+    "docosahexaenoic acid": ["docosahexaenoic acid", "dha", "omega-3 fatty acid"],
+    "donepezil": ["donepezil", "aricept"],
+    "duloxetine": ["duloxetine", "cymbalta"],
+    "escitalopram": ["escitalopram", "lexapro"],
+    "filgrastim": ["filgrastim", "neupogen"],
+    "fingolimod": ["fingolimod", "gilenya"],
+    "glatiramer acetate": ["glatiramer acetate", "copaxone"],
+    "hydrocodoneapap": ["hydrocodone apap", "vicodin", "norco"],
+    "ibudilast": ["ibudilast"],
+    "icosapent ethyl": ["icosapent ethyl", "vascepa"],
+    "immunoglobulin": ["immunoglobulin", "ivig"],
+    "inosine": ["inosine"],
+    "insulin": ["insulin"],
+    "lipoic acid": ["lipoic acid", "alpha lipoic acid", "ala"],
+    "lithium": ["lithium"],
+    "lithium carbonate": ["lithium carbonate"],
+    "memantine": ["memantine", "namenda"],
+    "metformin": ["metformin", "glucophage"],
+    "methylphenidate": ["methylphenidate", "ritalin", "concerta"],
+    "midazolam": ["midazolam", "versed"],
+    "minocycline": ["minocycline"],
+    "modafinil": ["modafinil", "provigil"],
+    "montelukast": ["montelukast", "singulair"],
+    "mycophenolate mofetil": ["mycophenolate mofetil", "cellcept"],
+    "omega-3 fatty acids": ["omega-3 fatty acids", "fish oil", "epa", "dha"],
+    "oxaloacetate": ["oxaloacetate"],
+    "paracetamol": ["paracetamol", "acetaminophen", "tylenol"],
+    "pramipexole": ["pramipexole", "mirapex"],
+    "prednisone": ["prednisone"],
+    "quinidine": ["quinidine"],
+    "ramipril": ["ramipril", "altace"],
+    "rasagiline": ["rasagiline", "azilect"],
+    "rifaximin": ["rifaximin", "xifaxan"],
+    "riluzole": ["riluzole", "rilutek"],
+    "rivastigmine": ["rivastigmine", "exelon"],
+    "simvastatin": ["simvastatin", "zocor"],
+    "sirolimus": ["sirolimus", "rapamune"],
+    "solifenacin": ["solifenacin", "vesicare"],
+    "tauroursodeoxycholic acid": ["tauroursodeoxycholic acid", "tudca"],
+    "telmisartan": ["telmisartan", "micardis"],
+    "triheptanoin": ["triheptanoin"],
+    "valproic acid": ["valproic acid", "depakote", "divalproex"],
+    "varenicline": ["varenicline", "chantix"],
+    "venlafaxine": ["venlafaxine", "effexor"],
+    "vitamin d": ["vitamin d", "cholecalciferol", "ergocalciferol"],
+    "warfarin": ["warfarin", "coumadin"],
+    "zolpidem": ["zolpidem", "ambien"],
+    "acetaminophen": ["acetaminophen", "paracetamol", "tylenol"],
+    "ampreloxetine": ["ampreloxetine"],
+    "arimoclomol": ["arimoclomol"],
+    "auto-m-bfs": ["auto-m-bfs"],
+    "avp-923": ["avp-923"],
+    "azd": ["azd"],
+    "buntanetapposiphen": ["buntanetapposiphen"],
+    "busulfan cyclophosphamide antithymocyte globulin": ["busulfan cyclophosphamide antithymocyte globulin"],
+    "cilostazol": ["cilostazol", "pletal"],
+    "circadin": ["circadin"],
+    "ck-2017357": ["ck-2017357"],
+    "datscan ioflupane": ["datscan ioflupane"],
+    "dimebon": ["dimebon"],
+    "droxidopa": ["droxidopa", "northera"],
+    "filgrastim": ["filgrastim", "neupogen"],
+    "florbetapir": ["florbetapir"],
+    "flortaucipir f": ["flortaucipir f"],
+    "flutemetamol": ["flutemetamol"],
+    "ibudilast": ["ibudilast"],
+    "incobotulinum toxin a": ["incobotulinum toxin a", "xeomin"],
+    "intepirdine": ["intepirdine"],
+    "interferon": ["interferon", "avonex", "betaseron", "rebif"],
+    "ionis maptrx": ["ionis maptrx"],
+    "ipx": ["ipx"],
+    "isosorbide mononitrate": ["isosorbide mononitrate", "ismn"],
+    "laquinimod": ["laquinimod"],
+    "lubiprostone": ["lubiprostone", "amitiza"],
+    "melphalan": ["melphalan"],
+    "montelukast": ["montelukast", "singulair"],
+    "mt-1186": ["mt-1186"],
+    "myobloc": ["myobloc"],
+    "neflamapimod": ["neflamapimod"],
+    "nelotanserin": ["nelotanserin"],
+    "nuedexta": ["nuedexta"],
+    "onabotulinumtoxin a": ["onabotulinumtoxin a", "botox"],
+    "pimavanserin": ["pimavanserin"],
+    "posiphen": ["posiphen"],
+    "pridopidine": ["pridopidine"],
+    "reldesemtiv": ["reldesemtiv"],
+    "safinamide": ["safinamide"],
+    "sage-718": ["sage-718"],
+    "scopolamine": ["scopolamine"],
+    "suvorexant": ["suvorexant", "belsomra"],
+    "tirasemtiv": ["tirasemtiv"],
+    "verdiperstat": ["verdiperstat"],
+    "yokukansan": ["yokukansan"]
+}
+
+
+drug_synonym_to_canonical = {}
+for canonical, synonyms in drug_synonyms_dict.items():
+    for syn in synonyms:
+        drug_synonym_to_canonical[syn.lower()] = canonical  
+
+data = [(syn, canonical) for syn, canonical in drug_synonym_to_canonical.items()]
+synonyms_df = pd.DataFrame(data, columns=["synonym", "substance_name"])
+
+ddn_drug_inventory["substance_name_lower"] = ddn_drug_inventory["substance_name"].str.lower()
+synonyms_df["synonym_lower"] = synonyms_df["synonym"].str.lower()
+
+# Merge 
+merged_df = pd.merge(
+    synonyms_df,
+    ddn_drug_inventory,
+    left_on="synonym_lower",
+    right_on="substance_name_lower",
+    how="left",
+    suffixes=('_syn', '_orig')
+)
+
+
+
+
+
+
+
+
 
 #create a disease inventory for all synonyms/abbreviations for the 13 diseases. 
 
@@ -709,3 +865,5 @@ disease_disease_network.to_csv("CT_DDN.csv", index=False)
 # - edited drug_inventory (type dataframe)
 # - diseases not related through the DDN: difference_df_1_minus_2
 difference_df_1_minus_2.to_csv("disease_pairs_not_in_ddn.csv", index=False)  
+
+
