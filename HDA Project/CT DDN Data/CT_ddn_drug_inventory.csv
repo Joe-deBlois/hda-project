@@ -1,0 +1,100 @@
+substance_name,drug,potential_drug_code,supplement
+abbv-8e,0,1,0
+acetaminophen,1,0,0
+acetylcysteine,1,0,0
+alprazolam,1,0,0
+amantadine,1,0,0
+ampreloxetine,1,0,0
+arimoclomol,1,0,0
+armodafinil,1,0,0
+at-1501,0,1,0
+atomoxetine,1,0,0
+auto-m-bfs,1,0,0
+avp-923,0,1,0
+azd,1,0,0
+botulinum toxin type B,1,0,0
+buntanetapposiphen,1,0,0
+busulfan cyclophosphamide antithymocyte globulin,1,0,0
+cilostazol,1,0,0
+citalopram,1,0,0
+ck-2017357,0,1,0
+coenzyme q10,0,0,1
+creatine,0,0,1
+curcumin,0,0,1
+dextromethorphan,1,0,0
+donepezil,1,0,0
+droxidopa,1,0,0
+duloxetine,1,0,0
+escitalopram,1,0,0
+filgrastim,1,0,0
+fingolimod,1,0,0
+florbetapir,1,0,0
+flortaucipir f,1,0,0
+flutemetamolf,1,0,0
+glatiramer acetate,1,0,0
+hydrocodoneapap,1,0,0
+ibudilast,1,0,0
+immunoglobulin,1,0,0
+incobotulinum toxin a,1,0,0
+inosine,0,0,1
+insulin,1,0,0
+intepirdine,1,0,0
+interferon,1,0,0
+ionis maptrx,1,0,0
+isosorbide mononitrate,1,0,0
+laquinimod,1,0,0
+latrepirdine,1,0,0
+lipoic acid,0,0,1
+lithium,1,0,0
+lithium carbonate,1,0,0
+lubiprostone,1,0,0
+melatonin,1,0,0
+melphalan,1,0,0
+memantine,1,0,0
+metformin,1,0,0
+methylphenidate,1,0,0
+methylprednisolone,1,0,0
+midazolam,1,0,0
+minocycline,1,0,0
+mirabegron,1,0,0
+modafinil,1,0,0
+montelukast,1,0,0
+mt-1186,0,1,0
+mycophenolate mofetil,1,0,0
+nelotanserin,1,0,0
+nuedexta,1,0,0
+omega-3 fatty acids,0,0,1
+onabotulinumtoxin a,1,0,0
+oxaloacetate,0,0,1
+paracetamol,1,0,0
+pimavanserin,1,0,0
+posiphen,1,0,0
+pramipexole,1,0,0
+prednisone,1,0,0
+pridopidine,1,0,0
+quinidine,1,0,0
+ramipril,1,0,0
+rasagiline,1,0,0
+reldesemtiv,1,0,0
+rifaximin,1,0,0
+riluzole,1,0,0
+rivastigmine,1,0,0
+safinamide,1,0,0
+sage-718,0,1,0
+scopolamine,1,0,0
+simvastatin,1,0,0
+sirolimus,1,0,0
+solifenacin,1,0,0
+suvorexant,1,0,0
+tauroursodeoxycholic acid,0,0,1
+telmisartan,1,0,0
+tirasemtiv,1,0,0
+triheptanoin,0,0,1
+valproic acid,1,0,0
+varenicline,1,0,0
+venlafaxine,1,0,0
+verdiperstat,1,0,0
+vitamin d,0,0,1
+warfarin,1,0,0
+yokukansan,0,0,1
+zolpidem,1,0,0

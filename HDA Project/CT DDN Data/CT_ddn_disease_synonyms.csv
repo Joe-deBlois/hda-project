@@ -1,0 +1,121 @@
+normalized_disease_name,synonym
+cjd,disease: CJD
+cjd,creutzfeldt jakob disease
+cjd,creutzfeldt-jakob disease
+cjd,subacute spongiform encephalopathy
+cjd,neurocognitive disorder due to prion disease
+cjd,spastic pseudosclerosis
+lbd,disease: LBD
+lbd,lewy body dementia
+lbd,dlb
+lbd,dementia with lewy bodies
+msa,disease: MSA
+msa,msa
+msa,multiple system atrophy
+msa,shy-drager syndrome
+msa,D019578
+hunt,disease: Hunt
+hunt,huntingtons
+hunt,huntington's
+hunt,huntington's chorea
+hunt,huntington disease
+hunt,D006816
+park,disease: Park
+park,parkinson's disease
+park,parkinsons
+park,parkinson's
+park,parkinsons disease
+park,idiopathic parkinsonism
+park,primary parkinsonism
+park,idiopathic or primary parkinsonism
+park,hypokinetic rigid syndrome
+park,paralysis agitans
+park,shaking palsy
+park,D010300
+park,parkinson disease
+mulscl,disseminated sclerosis
+mulscl,multiple cerebral sclerosis
+mulscl,multiple cerebro-spinal sclerosis
+mulscl,encephalomyelitis disseminata
+mulscl,multiple sclerosis
+mulscl,disease: MulScle
+mulscl,D009103
+mulscl,D020528
+mulscl,D020529
+cte,disease: CTE
+cte,chronic traumatic encephalopathy
+cte,dementia pugilistica
+cte,punch drunk syndrome
+cte,cte
+cte,D000070627
+vascdem,disease: VascDem
+vascdem,vascular dementia
+vascdem,dementia due to cerebrovascular disease
+vascdem,vascular cognitive impairment
+vascdem,D015140
+als,als
+als,disease: ALS
+als,amyotrophic lateral sclerosis
+als,motor neurone disease
+als,mnd
+als,lou gehrig's disease
+als,lou gehrigs disease
+als,charcots disease
+als,charcot's disease
+als,D000690
+als,C565957
+als,C565956
+psp,disease: PSP
+psp,progressive supranuclear palsy
+psp,steele-richardson-olszewski syndrome
+psp,steele richardson olszewski syndrome
+psp,frontotemporal dementia with parkinsonism
+psp,psp
+ftd,disease: FTD
+ftd,frontotemporal dementia
+ftd,ftd
+ftd,frontotemporal degeneration
+ftd,frontal lobe dementia
+ftd,pick's disease
+ftd,picks disease
+ftd,D057180
+ftd,C566288
+alzheimer's,alzheimers
+alzheimer's,alzheimer's dementia
+alzheimer's,disease: Alz
+alzheimer's,D000544
+alzheimer's,C536595
+alzheimer's,C563834
+alzheimer's,C536594
+alzheimer's,C536596
+alzheimer's,C536598
+alzheimer's,C565325
+alzheimer's,C566465
+alzheimer's,C566578
+alzheimer's,C564622
+alzheimer's,C567463
+alzheimer's,C565228
+alzheimer's,C565251
+alzheimer's,C567000
+alzheimer's,C566999
+alzheimer's,C567022
+alzheimer's,C566998
+alzheimer's,C536599
+alzheimer's,C566299
+alzheimer's,C564330
+alzheimer's,C564329
+alzheimer's,C565728
+ncl,disease: NCL
+ncl,ncl
+ncl,neuronal ceroid lipofuscinosis
+ncl,D009472
+ncl,neuronal ceroid-lipofuscinoses
+ncl,C537952
+ncl,C575534
+ncl,C566438
+ncl,C537948
+ncl,C563989
+ncl,C537953
+ncl,C566857
+ncl,C564953
+ncl,C566627

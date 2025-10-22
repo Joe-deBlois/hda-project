@@ -730,8 +730,19 @@ ddn_drug_inventory["drug"] = ddn_drug_inventory.apply(
     axis=1
 )
 
+
+
+
+
+
+
+
+##########################################################
+#            DRUG SYNONYMS FOR NORMALIZATION             #
+##########################################################
+
 #drug synoyms and MeSH codes
-drug_synonyms_dict = synonyms_dict = {
+drug_synonyms_dict = {
     "acetaminophen": ["acetaminophen", "paracetamol", "tylenol", "D000082"],
     "acetylcysteine": ["acetylcysteine", "n-acetylcysteine", "nac", "mucomyst", "D000111", "C487056"],
     "alprazolam": ["alprazolam", "xanax", "D000525"],
@@ -833,44 +844,99 @@ drug_synonyms_dict = synonyms_dict = {
     "yokukansan": ["yokukansan", "yi-gan san", "C524644", "yokukan-san"]
 }
 
-###FIX THIS MERGING PART!!!
 
-drug_synonym_to_canonical = {}
-for canonical, synonyms in drug_synonyms_dict.items():
-    for syn in synonyms:
-        drug_synonym_to_canonical[syn.lower()] = canonical  
+#DEFINE ALL SYNONYMS FOR DRUGS IN ONE DATAFRAME
+#want to have ddn_drug_inventory.columns = "substance_name", ... , "drug", "potential_drug_code", "supplement"
 
-data = [(syn, canonical) for syn, canonical in drug_synonym_to_canonical.items()]
-synonyms_df = pd.DataFrame(data, columns=["synonym", "substance_name"])
+ddn_drug_synonyms = pd.DataFrame()
+ddn_drug_synonyms["normalized_substance_name"] = None
+ddn_drug_synonyms["synonym"] = None
 
-ddn_drug_inventory["substance_name"] = ddn_drug_inventory["substance_name"]
-
-# Merge 
-ddn_drug_inventory = pd.merge(
-    synonyms_df,
-    ddn_drug_inventory,
-    left_on="synonym",
-    right_on="substance_name",
-    how="left",
-    suffixes=('_syn', '_orig')
-)
+row = 0
+for drug in drug_synonyms_dict:
+    for s in range(len(drug_synonyms_dict[drug])):
+        ddn_drug_synonyms.loc[row, "normalized_substance_name"]= drug
+        ddn_drug_synonyms.loc[row, "synonym"] = drug_synonyms_dict[drug][s]
+        row += 1
 
 
 
 
 
-#note: collapse docosahexaenoic acid into omega-3 fatty acids 
+
+
+##########################################################
+#            DISEASE SYNONYMS FOR NORMALIZATION             #
+##########################################################
+
+#diseases and MeSH codes
+
+disease_synonyms_dict = {
+    'cjd' : ["disease: CJD", "creutzfeldt jakob disease", "creutzfeldt-jakob disease", "subacute spongiform encephalopathy", "neurocognitive disorder due to prion disease", "spastic pseudosclerosis"], 
+
+    'lbd': ["disease: LBD", "lewy body dementia", "dlb", "dementia with lewy bodies"], 
+
+    'msa': ["disease: MSA", "msa", "multiple system atrophy", "shy-drager syndrome", "D019578"],
+
+    "hunt": ["disease: Hunt", "huntingtons", "huntington's", "huntington's chorea", "huntington disease", "D006816"], 
+
+    "park": ["disease: Park", "parkinson's disease", "parkinsons", "parkinson's", "parkinsons disease", "idiopathic parkinsonism", "primary parkinsonism", "idiopathic or primary parkinsonism", "hypokinetic rigid syndrome", "paralysis agitans", "shaking palsy", "D010300", "parkinson disease"], 
+
+    "mulscl" : ["disseminated sclerosis", "multiple cerebral sclerosis", "multiple cerebro-spinal sclerosis", "encephalomyelitis disseminata", "multiple sclerosis", "disease: MulScle", "D009103", "D020528", "D020529"], 
+
+    'cte': ["disease: CTE", "chronic traumatic encephalopathy", "dementia pugilistica", "punch drunk syndrome", "cte", "D000070627"], 
+
+    "vascdem": ["disease: VascDem", "vascular dementia", "dementia due to cerebrovascular disease", "vascular cognitive impairment", "D015140"], 
+
+    'als':["als", "disease: ALS", "amyotrophic lateral sclerosis", "motor neurone disease", "mnd", "lou gehrig's disease", "lou gehrigs disease", "charcots disease", "charcot's disease", "D000690", "C565957", "C565956"], 
+
+    "psp": ["disease: PSP", "progressive supranuclear palsy", "steele-richardson-olszewski syndrome", "steele richardson olszewski syndrome", "frontotemporal dementia with parkinsonism", "psp"], 
+
+    'ftd': ["disease: FTD", "frontotemporal dementia", "ftd", "frontotemporal degeneration", "frontal lobe dementia", "pick's disease", "picks disease", "D057180", "C566288"], 
+
+    "alzheimer's" : ["alzheimers", "alzheimer's dementia", "disease: Alz", "D000544", "C536595", "C563834", "C536594", "C536596", "C536598", "C565325", "C566465", "C566578", "C564622", "C567463", "C565228", "C565251", "C567000", "C566999", "C567022", "C566998", "C536599", "C566299", "C564330", "C564329", "C565728"], 
+
+    'ncl' : ["disease: NCL", "ncl", "neuronal ceroid lipofuscinosis", "D009472", "neuronal ceroid-lipofuscinoses", "C537952", "C575534", "C566438", "C537948", "C563989", "C537953", "C566857", "C564953", "C566627"]
+}
+
+ #DEFINE ALL SYNONYMS FOR DISEASES IN ONE DATAFRAME
+#similar to drug version
+
+ddn_disease_synonyms = pd.DataFrame()
+ddn_disease_synonyms["normalized_disease_name"] = None
+ddn_disease_synonyms["synonym"] = None
+
+row = 0
+for disease in disease_synonyms_dict:
+    for d in range(len(disease_synonyms_dict[disease])):
+        ddn_disease_synonyms.loc[row, "normalized_disease_name"]= disease
+        ddn_disease_synonyms.loc[row, "synonym"] = disease_synonyms_dict[disease][d]
+        row += 1
 
 
 
-#create a disease inventory for all synonyms/abbreviations for the 13 diseases. 
+
+
+
+#########################################
+#               SAVE DATA               #
+#########################################
 
 #What do we want to save for the network? 
+
 # - disease_disease_relationship (type dataframe)
-#disease_disease_network.to_csv("CT_DDN.csv", index=False)  
-# - edited disease_inventory (type dataframe)
-# - edited drug_inventory (type dataframe)
-# - diseases not related through the DDN: difference_df_1_minus_2
-difference_df_1_minus_2.to_csv("disease_pairs_not_in_ddn.csv", index=False)  
+disease_disease_network.to_csv("CT_DDN.csv", index=False)  
+
+# - ddn_disease_synonyms (type dataframe)
+ddn_disease_synonyms.to_csv("CT_ddn_disease_synonyms.csv", index=False)  
+
+# - ddn_drug_inventory (type dataframe)
+ddn_drug_inventory.to_csv("CT_ddn_drug_inventory.csv", index=False) 
+
+# - ddn_drug_synonyms
+ddn_drug_synonyms.to_csv("CT_ddn_drug_synonyms.csv", index=False)  
+
+# - diseases not related through the DDN
+difference_df_1_minus_2.to_csv("CT_disease_pairs_not_in_ddn.csv", index=False)  
 
 

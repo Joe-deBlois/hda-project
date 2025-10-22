@@ -1,0 +1,45 @@
+Disease 1,Disease 2,Weight,Drugs
+LBD,Park,5,"['pimavanserin', 'donepezil', 'nelotanserin', 'memantine', 'intepirdine']"
+LBD,MulScle,2,"['armodafinil', 'memantine']"
+LBD,VascDem,1,['pimavanserin']
+LBD,ALS,1,['memantine']
+LBD,PSP,1,['pimavanserin']
+LBD,FTD,2,"['memantine', 'pimavanserin']"
+LBD,Alz,4,"['intepirdine', 'memantine', 'pimavanserin', 'donepezil']"
+MSA,Park,4,"['safinamide', 'droxidopa', 'ampreloxetine', 'rasagiline']"
+MSA,MulScle,7,"['rasagiline', 'prednisone', 'interferon', 'midazolam', 'insulin', 'reldesemtiv', 'fingolimod']"
+MSA,ALS,5,"['rasagiline', 'prednisone', 'verdiperstat', 'reldesemtiv', 'fingolimod']"
+MSA,Alz,5,"['azd', 'rasagiline', 'immunoglobulin', 'valproic acid', 'insulin']"
+Hunt,Park,2,"['atomoxetine', 'sage-718']"
+Hunt,MulScle,3,"['atomoxetine', 'quinidine', 'laquinimod']"
+Hunt,ALS,5,"['creatine', 'pridopidine', 'coenzyme q10', 'triheptanoin', 'quinidine']"
+Hunt,Alz,7,"['minocycline', 'atomoxetine', 'latrepirdine', 'citalopram', 'scopolamine', 'sage-718', 'alprazolam']"
+Park,MulScle,19,"['lubiprostone', 'atomoxetine', 'memantine', 'vitamin d', 'warfarin', 'amantadine', 'paracetamol', 'acetaminophen', 'onabotulinumtoxin a', 'pramipexole', 'methylphenidate', 'acetylcysteine', 'rasagiline', 'omega-3 fatty acids', 'mirabegron', 'botulinum toxin type B', 'modafinil', 'avp-923', 'duloxetine']"
+Park,CTE,4,"['florbetapir', 'incobotulinum toxin a', 'methylphenidate', 'amantadine']"
+Park,VascDem,2,"['acetylcysteine', 'pimavanserin']"
+Park,ALS,6,"['modafinil', 'rasagiline', 'memantine', 'pramipexole', 'inosine', 'botulinum toxin type B']"
+Park,PSP,1,['pimavanserin']
+Park,FTD,4,"['florbetapir', 'acetylcysteine', 'memantine', 'pimavanserin']"
+Park,Alz,21,"['rivastigmine', 'donepezil', 'atomoxetine', 'memantine', 'sage-718', 'florbetapir', 'pramipexole', 'methylphenidate', 'varenicline', 'rasagiline', 'solifenacin', 'buntanetapposiphen', 'oxaloacetate', 'omega-3 fatty acids', 'posiphen', 'intepirdine', 'avp-923', 'modafinil', 'pimavanserin', 'rifaximin', 'venlafaxine']"
+MulScle,CTE,2,"['methylphenidate', 'amantadine']"
+MulScle,VascDem,2,"['acetylcysteine', 'melatonin']"
+MulScle,ALS,24,"['prednisone', 'memantine', 'yokukansan', 'ck-2017357', 'mycophenolate mofetil', 'tauroursodeoxycholic acid', 'lithium carbonate', 'pramipexole', 'glatiramer acetate', 'methylprednisolone', 'dextromethorphan', 'rasagiline', 'mt-1186', 'reldesemtiv', 'escitalopram', 'riluzole', 'curcumin', 'fingolimod', 'modafinil', 'quinidine', 'at-1501', 'botulinum toxin type B', 'ibudilast', 'tirasemtiv']"
+MulScle,PSP,1,['lipoic acid']
+MulScle,FTD,3,"['memantine', 'acetylcysteine', 'lithium carbonate']"
+MulScle,Alz,21,"['montelukast', 'sirolimus', 'filgrastim', 'atomoxetine', 'memantine', 'tauroursodeoxycholic acid', 'lithium carbonate', 'pramipexole', 'methylphenidate', 'simvastatin', 'melatonin', 'rasagiline', 'melphalan', 'insulin', 'omega-3 fatty acids', 'escitalopram', 'riluzole', 'suvorexant', 'avp-923', 'modafinil', 'lipoic acid']"
+MulScle,NCL,1,['mycophenolate mofetil']
+CTE,VascDem,1,['auto-m-bfs']
+CTE,PSP,1,['flortaucipir f']
+CTE,FTD,2,"['florbetapir', 'flortaucipir f']"
+CTE,Alz,3,"['florbetapir', 'flortaucipir f', 'methylphenidate']"
+VascDem,ALS,1,['nuedexta']
+VascDem,PSP,1,['pimavanserin']
+VascDem,FTD,2,"['acetylcysteine', 'pimavanserin']"
+VascDem,Alz,10,"['flutemetamolf', 'pimavanserin', 'hydrocodoneapap', 'isosorbide mononitrate', 'ramipril', 'cilostazol', 'zolpidem', 'telmisartan', 'metformin', 'melatonin']"
+ALS,FTD,3,"['arimoclomol', 'memantine', 'lithium carbonate']"
+ALS,Alz,8,"['modafinil', 'tauroursodeoxycholic acid', 'rasagiline', 'lithium carbonate', 'memantine', 'pramipexole', 'escitalopram', 'riluzole']"
+ALS,NCL,1,['mycophenolate mofetil']
+PSP,FTD,3,"['flortaucipir f', 'lithium', 'pimavanserin']"
+PSP,Alz,4,"['lipoic acid', 'flortaucipir f', 'lithium', 'pimavanserin']"
+FTD,Alz,8,"['florbetapir', 'lithium', 'pimavanserin', 'abbv-8e', 'flortaucipir f', 'lithium carbonate', 'memantine', 'ionis maptrx']"
+FTD,NCL,1,['busulfan cyclophosphamide antithymocyte globulin']

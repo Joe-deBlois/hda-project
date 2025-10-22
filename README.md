@@ -21,10 +21,8 @@ Next Steps:
 - done ---3 clean up drugs
 - done ---4 any repeated NCT Trials across diseases??? If yes, determine how to treat these repeated trials
 - done ---5 save master dataset
-- 6 exploration plots and drugs shared by >= 2 diseases
-- 7 look for how many trials contain more than one disease and contain at least one drug
-- 8 look for how many trials contain more than one disease and drug? 
-- 9 UMLS to find drug terminology; create master dataset for all diseases and drugs that are saved in disease_disease_relationship dataset
-- 10 disease-disease network with drug connections
-- 11 find drug names in pubmed from disease&drug dataset and do similar process
+- mostly done ---6 exploration plots and drugs shared by >= 2 diseases
+- done ---7 UMLS to find drug terminology; create master dataset for all diseases and drugs that are saved in disease_disease_relationship dataset
+- 8 disease-disease network with drug connections using networkX package
+- 9 find drug names in pubmed from disease&drug dataset and do similar process
 
