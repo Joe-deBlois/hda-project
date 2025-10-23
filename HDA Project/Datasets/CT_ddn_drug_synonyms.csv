@@ -2,234 +2,230 @@ normalized_substance_name,synonym
 acetaminophen,acetaminophen
 acetaminophen,paracetamol
 acetaminophen,tylenol
-acetaminophen,D000082
+acetaminophen,d000082
 acetylcysteine,acetylcysteine
 acetylcysteine,n-acetylcysteine
 acetylcysteine,nac
 acetylcysteine,mucomyst
-acetylcysteine,D000111
-acetylcysteine,C487056
+acetylcysteine,d000111
+acetylcysteine,c487056
 alprazolam,alprazolam
 alprazolam,xanax
-alprazolam,D000525
+alprazolam,d000525
 amantadine,amantadine
 amantadine,symmetrel
 amantadine,amantadine hydrochloride
-amantadine,D000547
+amantadine,d000547
 armodafinil,armodafinil
 armodafinil,nuvigil
-armodafinil,D000077408
+armodafinil,d000077408
 atomoxetine,atomoxetine
 atomoxetine,strattera
 atomoxetine,atomoxetine hydrochloride
-atomoxetine,D000069445
-atomoxetine,C0076823
+atomoxetine,d000069445
+atomoxetine,c0076823
 citalopram,citalopram
 citalopram,celexa
-citalopram,D015283
+citalopram,d015283
 coenzyme q10,coenzyme q10
 coenzyme q10,coq10
 coenzyme q10,ubiquinone
 coenzyme q10,ubiquinone-10
-coenzyme q10,C024989
-coenzyme q10,C026663
+coenzyme q10,c024989
+coenzyme q10,c026663
 creatine,creatine
-creatine,D003401
+creatine,d003401
 curcumin,curcumin
 curcumin,turmeric extract
 curcumin,curcuma longa
-curcumin,D003474
+curcumin,d003474
 cyclophosphamide,cyclophosphamide
 cyclophosphamide,cytoxan
-cyclophosphamide,D003520
+cyclophosphamide,d003520
 dexamethasone,dexamethasone
 dexamethasone,decadron
-dexamethasone,D003907
+dexamethasone,d003907
 dextromethorphan,dextromethorphan
 dextromethorphan,dxm
-dextromethorphan,D003915
+dextromethorphan,d003915
 donepezil,donepezil
 donepezil,aricept
-donepezil,D000077265
+donepezil,d000077265
 duloxetine,duloxetine
 duloxetine,cymbalta
-duloxetine, D000068736
+duloxetine,d000068736
 escitalopram,escitalopram
 escitalopram,lexapro
-escitalopram,D000089983
+escitalopram,d000089983
 filgrastim,filgrastim
 filgrastim,neupogen
-filgrastim,D000069585
+filgrastim,d000069585
 fingolimod,fingolimod
 fingolimod,gilenya
-fingolimod, D000068876
+fingolimod,d000068876
 fingolimod,fingolimod hydrochloride
 glatiramer acetate,glatiramer acetate
 glatiramer acetate,copaxone
-glatiramer acetate,D000068717
+glatiramer acetate,d000068717
 hydrocodoneapap,hydrocodone apap
 hydrocodoneapap,vicodin
-hydrocodoneapap,norco
-hydrocodoneapap,C083640
-hydrocodoneapap,acetaminophin + hydrocone
+hydrocodoneapap,c083640
+hydrocodoneapap,acetaminophen + hydrocodone
 hydrocodoneapap,anexsia
 hydrocodoneapap,co-gesic
 hydrocodoneapap,lorcet
 hydrocodoneapap,lortab
 hydrocodoneapap,norco
 hydrocodoneapap,zydone
-ibudilast,ibudilast
-ibudilast,C038366
 icosapent ethyl,icosapent ethyl
 icosapent ethyl,vascepa
 icosapent ethyl,epadiolex
-icosapent ethyl,C035276
+icosapent ethyl,c035276
 immunoglobulin,immunoglobulin
 immunoglobulin,ivig
-immunoglobulin,D007136
+immunoglobulin,d007136
 inosine,inosine
-inosine,D007288
+inosine,d007288
 insulin,insulin
-insulin,D007328
+insulin,d007328
 lipoic acid,lipoic acid
 lipoic acid,alpha lipoic acid
 lipoic acid,ala
 lipoic acid,thioctic acid
-lipoic acid,D008063
+lipoic acid,d008063
 lithium,lithium
-lithium,D008094
+lithium,d008094
 lithium carbonate,lithium carbonate
-lithium carbonate,D016651
+lithium carbonate,d016651
 memantine,memantine
 memantine,namenda
-memantine, D008559
+memantine,d008559
 metformin,metformin
 metformin,glucophage
-metformin,D008687
+metformin,d008687
 methylphenidate,methylphenidate
 methylphenidate,ritalin
 methylphenidate,concerta
-methylphenidate,D008774
+methylphenidate,d008774
 midazolam,midazolam
 midazolam,versed
-midazolam,D008874
+midazolam,d008874
 minocycline,minocycline
-minocycline,D008911
+minocycline,d008911
 modafinil,modafinil
 modafinil,provigil
-modafinil,D000077408
+modafinil,d000077408
 montelukast,montelukast
 montelukast,singulair
-montelukast,C093875
+montelukast,c093875
 mycophenolate mofetil,mycophenolate mofetil
 mycophenolate mofetil,cellcept
-mycophenolate mofetil,D009173
+mycophenolate mofetil,d009173
 omega-3 fatty acids,omega-3 fatty acids
 omega-3 fatty acids,fish oil
 omega-3 fatty acids,epa
 omega-3 fatty acids,dha
-omega-3 fatty acids,D015525
+omega-3 fatty acids,d015525
 omega-3 fatty acids,docosahexaenoic acid
-omega-3 fatty acids,D004281
+omega-3 fatty acids,d004281
 oxaloacetate,oxaloacetate
-oxaloacetate,D062907
-paracetamol,paracetamol
-paracetamol,acetaminophen
-paracetamol,tylenol
-paracetamol,D000082
+oxaloacetate,d062907
 pramipexole,pramipexole
 pramipexole,mirapex
-pramipexole,D000077487
+pramipexole,d000077487
 prednisone,prednisone
-prednisone,D011241
+prednisone,d011241
 quinidine,quinidine
-quinidine,D011802
+quinidine,d011802
 ramipril,ramipril
 ramipril,altace
-ramipril,D017257
+ramipril,d017257
 rasagiline,rasagiline
 rasagiline,azilect
-rasagiline,C031967
+rasagiline,c031967
 rifaximin,rifaximin
 rifaximin,xifaxan
-rifaximin,D000078262
+rifaximin,d000078262
 riluzole,riluzole
 riluzole,rilutek
-riluzole,D019782
+riluzole,d019782
 rivastigmine,rivastigmine
 rivastigmine,exelon
-rivastigmine,D000068836
+rivastigmine,d000068836
 simvastatin,simvastatin
 simvastatin,zocor
-simvastatin,D019821
+simvastatin,d019821
 sirolimus,sirolimus
 sirolimus,rapamune
-sirolimus,D020123
+sirolimus,d020123
 solifenacin,solifenacin
 solifenacin,vesicare
-solifenacin,D000069464
+solifenacin,d000069464
 solifenacin,solifenacin succinate
 tauroursodeoxycholic acid,tauroursodeoxycholic acid
 tauroursodeoxycholic acid,tudca
-tauroursodeoxycholic acid,ursodoxicoltaurine
-tauroursodeoxycholic acid,C031655
+tauroursodeoxycholic acid,ursodeoxychol taurine
+tauroursodeoxycholic acid,ursodeoxycholic taurine
+tauroursodeoxycholic acid,c031655
 telmisartan,telmisartan
 telmisartan,micardis
-telmisartan,D000077333
+telmisartan,d000077333
 triheptanoin,triheptanoin
-triheptanoin,C531010
+triheptanoin,c531010
 valproic acid,valproic acid
 valproic acid,depakote
 valproic acid,divalproex
-valproic acid,D014635
+valproic acid,d014635
 varenicline,varenicline
 varenicline,chantix
-varenicline,D00006858
+varenicline,d00006858
 venlafaxine,venlafaxine
 venlafaxine,effexor
-venlafaxine, D000069470
+venlafaxine,d000069470
 vitamin d,vitamin d
 vitamin d,cholecalciferol
 vitamin d,ergocalciferol
-vitamin d,D004872
-vitamin d,D002762
-vitamin d, D014807
+vitamin d,d004872
+vitamin d,d002762
+vitamin d,d014807
 warfarin,warfarin
 warfarin,coumadin
-warfarin,D014859
+warfarin,d014859
 zolpidem,zolpidem
 zolpidem,ambien
-zolpidem,D000077334
+zolpidem,d000077334
 ampreloxetine,ampreloxetine
-ampreloxetine,C000601820
+ampreloxetine,c000601820
 arimoclomol,arimoclomol
-arimoclomol,C486387
+arimoclomol,c486387
 auto-m-bfs,auto-m-bfs
 avp-923,avp-923
 azd,azd
 melatonin,melatonin
 melatonin,circadin
-melatonin,D008550
+melatonin,d008550
 buntanetapposiphen,buntanetapposiphen
 buntanetapposiphen,buntanetap
 buntanetapposiphen,posiphen
-buntanetapposiphen,ANVS-401
+buntanetapposiphen,anvs-401
 busulfan cyclophosphamide antithymocyte globulin,busulfan cyclophosphamide antithymocyte globulin
-busulfan cyclophosphamide antithymocyte globulin,ATG
+busulfan cyclophosphamide antithymocyte globulin,atg
 cilostazol,cilostazol
 cilostazol,pletal
-cilostazol,D000077407
+cilostazol,d000077407
 ck-2017357,ck-2017357
-ck-2017357,C572767
+ck-2017357,c572767
 ck-2017357,tirasemtiv
 latrepirdine,dimebon
-latrepirdine,C010119
+latrepirdine,c010119
 droxidopa,droxidopa
 droxidopa,northera
-droxidopa,D015103
+droxidopa,d015103
+ibudilast,ibudilast
+ibudilast,c038366
 incobotulinum toxin a,incobotulinum toxin a
 incobotulinum toxin a,xeomin
-incobotulinum toxin a,C545476
+incobotulinum toxin a,c545476
 incobotulinum toxin a,botulinum neurotoxin type a
 incobotulinum toxin a,bont/a
 incobotulinum toxin a,bont-a
@@ -241,8 +237,8 @@ interferon,avonex
 interferon,betaseron
 interferon,rebif
 interferon,interferon beta-1a
-interferon,D000068556
-interferon,D000068576
+interferon,d000068556
+interferon,d000068576
 interferon,interferon beta-1b
 ionis maptrx,ionis maptrx
 ionis maptrx,biib080
@@ -251,22 +247,22 @@ ipx203,ipx
 ipx203,ipx203
 isosorbide mononitrate,isosorbide mononitrate
 isosorbide mononitrate,ismn
-isosorbide mononitrate, C030397
+isosorbide mononitrate,c030397
 laquinimod,laquinimod
-laquinimod,C476223
+laquinimod,c476223
 lubiprostone,lubiprostone
 lubiprostone,amitiza
-lubiprostone,D000068238
+lubiprostone,d000068238
 melphalan,melphalan
-melphalan, D008558
+melphalan,d008558
 mt-1186,mt-1186
 botulinum toxin type b,myobloc
-botulinum toxin type b,botulinum toxin type B
+botulinum toxin type b,botulinum toxin type b
 botulinum toxin type b,rimabotulinumtoxinb
-botulinum toxin type b,C096323
+botulinum toxin type b,c096323
 neflamapimod,neflamapimod
 nelotanserin,nelotanserin
-nelotanserin,C546600
+nelotanserin,c546600
 nuedexta,nuedexta
 nuedexta,dextromethorphan hydrobromide and quinidine sulfate
 nuedexta,avp-923
@@ -275,33 +271,33 @@ onabotulinumtoxin a,onabotulinumtoxin a
 onabotulinumtoxin a,botox
 onabotulinumtoxin a,vistabel
 onabotulinumtoxin a,vistabex
-onabotulinumtoxin a,D019274
+onabotulinumtoxin a,d019274
 pimavanserin,pimavanserin
-pimavanserin,C510793
+pimavanserin,c510793
 pimavanserin,nuplazid
 posiphen,posiphen
 pridopidine,pridopidine
-pridopidine,C483720
+pridopidine,c483720
 pridopidine,huntexil
 pridopidine,acr16
 reldesemtiv,reldesemtiv
-reldesemtiv,C000722562
+reldesemtiv,c000722562
 reldesemtiv,ck-2127107
 safinamide,safinamide
-safinamide,C092797
+safinamide,c092797
 safinamide,xadago
 sage-718,sage-718
 scopolamine,scopolamine
 scopolamine,hyoscine
-scopolamine, D012601
+scopolamine,d012601
 suvorexant,suvorexant
 suvorexant,belsomra
-suvorexant,C551624
+suvorexant,c551624
 tirasemtiv,tirasemtiv
-tirasemtiv,CK-2017357
-tirasemtiv,C572767
+tirasemtiv,ck-2017357
+tirasemtiv,c572767
 verdiperstat,verdiperstat
 yokukansan,yokukansan
 yokukansan,yi-gan san
-yokukansan,C524644
+yokukansan,c524644
 yokukansan,yokukan-san

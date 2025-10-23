@@ -13,13 +13,13 @@ msa,disease: MSA
 msa,msa
 msa,multiple system atrophy
 msa,shy-drager syndrome
-msa,D019578
+msa,d019578
 hunt,disease: Hunt
 hunt,huntingtons
 hunt,huntington's
 hunt,huntington's chorea
 hunt,huntington disease
-hunt,D006816
+hunt,d006816
 park,disease: Park
 park,parkinson's disease
 park,parkinsons
@@ -31,7 +31,7 @@ park,idiopathic or primary parkinsonism
 park,hypokinetic rigid syndrome
 park,paralysis agitans
 park,shaking palsy
-park,D010300
+park,d010300
 park,parkinson disease
 mulscl,disseminated sclerosis
 mulscl,multiple cerebral sclerosis
@@ -39,20 +39,20 @@ mulscl,multiple cerebro-spinal sclerosis
 mulscl,encephalomyelitis disseminata
 mulscl,multiple sclerosis
 mulscl,disease: MulScle
-mulscl,D009103
-mulscl,D020528
-mulscl,D020529
+mulscl,d009103
+mulscl,d020528
+mulscl,d020529
 cte,disease: CTE
 cte,chronic traumatic encephalopathy
 cte,dementia pugilistica
 cte,punch drunk syndrome
 cte,cte
-cte,D000070627
+cte,d000070627
 vascdem,disease: VascDem
 vascdem,vascular dementia
 vascdem,dementia due to cerebrovascular disease
 vascdem,vascular cognitive impairment
-vascdem,D015140
+vascdem,d015140
 als,als
 als,disease: ALS
 als,amyotrophic lateral sclerosis
@@ -62,9 +62,9 @@ als,lou gehrig's disease
 als,lou gehrigs disease
 als,charcots disease
 als,charcot's disease
-als,D000690
-als,C565957
-als,C565956
+als,d000690
+als,c565957
+als,c565956
 psp,disease: PSP
 psp,progressive supranuclear palsy
 psp,steele-richardson-olszewski syndrome
@@ -78,44 +78,44 @@ ftd,frontotemporal degeneration
 ftd,frontal lobe dementia
 ftd,pick's disease
 ftd,picks disease
-ftd,D057180
-ftd,C566288
+ftd,d057180
+ftd,c566288
 alzheimer's,alzheimers
 alzheimer's,alzheimer's dementia
 alzheimer's,disease: Alz
-alzheimer's,D000544
-alzheimer's,C536595
-alzheimer's,C563834
-alzheimer's,C536594
-alzheimer's,C536596
-alzheimer's,C536598
-alzheimer's,C565325
-alzheimer's,C566465
-alzheimer's,C566578
-alzheimer's,C564622
-alzheimer's,C567463
-alzheimer's,C565228
-alzheimer's,C565251
-alzheimer's,C567000
-alzheimer's,C566999
-alzheimer's,C567022
-alzheimer's,C566998
-alzheimer's,C536599
-alzheimer's,C566299
-alzheimer's,C564330
-alzheimer's,C564329
-alzheimer's,C565728
+alzheimer's,d000544
+alzheimer's,c536595
+alzheimer's,c563834
+alzheimer's,c536594
+alzheimer's,c536596
+alzheimer's,c536598
+alzheimer's,c565325
+alzheimer's,c566465
+alzheimer's,c566578
+alzheimer's,c564622
+alzheimer's,c567463
+alzheimer's,c565228
+alzheimer's,c565251
+alzheimer's,c567000
+alzheimer's,c566999
+alzheimer's,c567022
+alzheimer's,c566998
+alzheimer's,c536599
+alzheimer's,c566299
+alzheimer's,c564330
+alzheimer's,c564329
+alzheimer's,c565728
 ncl,disease: NCL
 ncl,ncl
 ncl,neuronal ceroid lipofuscinosis
-ncl,D009472
+ncl,d009472
 ncl,neuronal ceroid-lipofuscinoses
-ncl,C537952
-ncl,C575534
-ncl,C566438
-ncl,C537948
-ncl,C563989
-ncl,C537953
-ncl,C566857
-ncl,C564953
-ncl,C566627
+ncl,c537952
+ncl,c575534
+ncl,c566438
+ncl,c537948
+ncl,c563989
+ncl,c537953
+ncl,c566857
+ncl,c564953
+ncl,c566627
