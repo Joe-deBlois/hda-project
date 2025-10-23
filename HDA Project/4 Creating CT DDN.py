@@ -93,7 +93,8 @@ else:
 #step 5: draw the graph
 plt.figure(figsize=(16, 8))
 
-#white nodes with black outlines
+#white nodes with green outlines
+#node outlines scale with the number of trials per disease in the DDN
 nx.draw_networkx_nodes(
     G, 
     pos,
@@ -107,16 +108,16 @@ nx.draw_networkx_nodes(
 nx.draw_networkx_edges(G, pos, edge_color= "#1B9E77", width=edge_widths)
 
 
-#disease labels
+#disease labels (placing the text over the node outlines)
 nx.draw_networkx_labels(
     G, 
     pos, 
     labels=labels, 
     font_size=12, 
     font_weight='bold', 
-    font_color='black',           # visible on white nodes
-    horizontalalignment='center', # center text horizontally
-    verticalalignment='center'    # center text vertically
+    font_color='black',           
+    horizontalalignment='center', 
+    verticalalignment='center'    
 )
 
 #title & show plot
