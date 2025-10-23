@@ -922,18 +922,18 @@ for disease in disease_synonyms_dict:
 #What do we want to save for the network? 
 
 # - disease_disease_relationship (type dataframe)
-disease_disease_network.to_csv("CT_DDN.csv", index=False)  
+#disease_disease_network.to_csv("CT_DDN.csv", index=False)  
 
 # - ddn_disease_synonyms (type dataframe)
-ddn_disease_synonyms.to_csv("CT_ddn_disease_synonyms.csv", index=False)  
+#ddn_disease_synonyms.to_csv("CT_ddn_disease_synonyms.csv", index=False)  
 
 # - ddn_drug_inventory (type dataframe)
-ddn_drug_inventory.to_csv("CT_ddn_drug_inventory.csv", index=False) 
+#ddn_drug_inventory.to_csv("CT_ddn_drug_inventory.csv", index=False) 
 
 # - ddn_drug_synonyms
-ddn_drug_synonyms.to_csv("CT_ddn_drug_synonyms.csv", index=False)  
+#ddn_drug_synonyms.to_csv("CT_ddn_drug_synonyms.csv", index=False)  
 
 # - diseases not related through the DDN
-difference_df_1_minus_2.to_csv("CT_disease_pairs_not_in_ddn.csv", index=False)  
+#difference_df_1_minus_2.to_csv("CT_disease_pairs_not_in_ddn.csv", index=False)  
 
 
