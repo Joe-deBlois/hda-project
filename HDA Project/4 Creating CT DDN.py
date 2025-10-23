@@ -21,6 +21,11 @@ print("Current working directory:", Path.cwd())
 #import graph data
 ct_ddn_df = pd.read_csv("CT_DDN.csv")
 
+#import num trials per disease (col1 = "Disease", col2 = "Trial Count")
+disease_trials_counts = pd.read_csv("CT_disease_trials_counts_df.csv")
+trial_count_dict = pd.Series(disease_trials_counts['Trial Count'].values,
+                             index=disease_trials_counts['Disease']).to_dict()
+
 #what are all possible weights?
 unique_weights = ct_ddn_df["Weight"].unique()
 print(len(unique_weights))
@@ -34,26 +39,9 @@ for idx, row in ct_ddn_df.iterrows():
     G.add_edge(row["Disease 1"], row["Disease 2"], weight = row["Weight"])
 
 
-#step 3: dictionaries of node and edge colors/styles
-#edge_mapping = {
-#    4: "#A6CEE3",
-#    8: "#1F78B4",
-#    24: "#08306B",
-#    5: "#FDBF6F",
-#    6: "#FF7F00",
-#    7: "#B15928",
-#    3: "#CAB2D6",
-#    19: "#6A3D9A",
-#    21: "#8E0152",
-#    1: "#CCCCCC",
-#    2: "#777777",
-#    10: "#1B9E77",
-#}
-
-#edge_colors = [edge_mapping[G[u][v]['weight']] for u, v in G.edges()]
-
-scale_factor = 0.3  # adjust for aesthetics
-edge_widths = [G[u][v]['weight'] * scale_factor for u, v in G.edges()]
+#step 3: dictionaries of node and edge aethetics
+edge_scale_factor = 0.3  
+edge_widths = [G[u][v]['weight'] * edge_scale_factor for u, v in G.edges()]
 
 node_mapping = {
     "LBD" : "LBD",
@@ -72,6 +60,17 @@ node_mapping = {
 }
 
 labels = {node: node_mapping.get(node, node) for node in G.nodes()}
+
+# Scale node outlines based on trial counts
+max_trials = max(trial_count_dict.values())
+min_width = 1
+max_width = 20
+
+# Map trial counts to linewidths between 1 and 5
+node_linewidths = [
+    min_width + (max_width - min_width) * (trial_count_dict.get(node, 1) / max_trials)
+    for node in G.nodes()
+]
 
 #step 4: define layout options and choose one 
 layout_choice = "two_rows" 
@@ -99,9 +98,9 @@ nx.draw_networkx_nodes(
     G, 
     pos,
     node_color='white',
-    edgecolors='black',
+    edgecolors='#1B9E77',
     node_size=1000,
-    linewidths=2  # thickness of the black border
+    linewidths= node_linewidths  # thickness of the black border
 )
 
 #edges with colors mapped by weight
@@ -109,7 +108,16 @@ nx.draw_networkx_edges(G, pos, edge_color= "#1B9E77", width=edge_widths)
 
 
 #disease labels
-nx.draw_networkx_labels(G, pos, labels=labels, font_size=9, font_weight='bold')
+nx.draw_networkx_labels(
+    G, 
+    pos, 
+    labels=labels, 
+    font_size=12, 
+    font_weight='bold', 
+    font_color='black',           # visible on white nodes
+    horizontalalignment='center', # center text horizontally
+    verticalalignment='center'    # center text vertically
+)
 
 #title & show plot
 plt.title("Clinical Trials Data Disease-Disease Network", fontsize=14)
@@ -134,13 +142,12 @@ legend_diseases = {
 from matplotlib.lines import Line2D
 
 legend_elements = [Line2D([0], [0], marker='o', color='w', label=f"{abbr} - {full}",
-                          markerfacecolor='white', markeredgecolor='black', markersize=10)
+                          markerfacecolor='white', markeredgecolor='#1B9E77', markersize=10)
                    for abbr, full in legend_diseases.items()]
 
 # Place legend outside plot
 plt.legend(handles=legend_elements, bbox_to_anchor=(1, 0.8), loc='upper left', fontsize=10)
 
-# Adjust layout to make room for legend
+# Show plot
 plt.tight_layout()
-
 plt.show()

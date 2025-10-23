@@ -700,6 +700,44 @@ print((len(pairs) - len(disease_disease_network)) == len(difference_df_1_minus_2
 
 
 
+##################################################
+#    How many Trials for Each drug in DDN?       #
+##################################################
+import ast
+
+# Convert string representations of lists to actual lists
+def ensure_list(x):
+    if isinstance(x, list):
+        return x
+    try:
+        return ast.literal_eval(x)
+    except:
+        return []
+
+master_df["Drug Interventions"] = master_df["Drug Interventions"].apply(ensure_list)
+
+# Build set of selected drugs from your network
+selected_drugs = set()
+for drug_list in disease_disease_network["Drugs"]:
+    selected_drugs.update(drug_list)
+
+# Function to check if trial contains any selected drug
+def trial_matches_drugs(drug_list):
+    return any(drug in selected_drugs for drug in drug_list)
+
+# Count trials per disease (one-hot encoded)
+disease_trials_counts = {}
+for disease in diseases:
+    subset = master_df[
+        (master_df[disease] == 1) &
+        (master_df["Drug Interventions"].apply(trial_matches_drugs))
+    ]
+    disease_trials_counts[disease] = len(subset)
+
+print(disease_trials_counts)
+
+disease_trials_counts_df = pd.Series(disease_trials_counts, name='Trial Count').reset_index()
+disease_trials_counts_df = disease_trials_counts_df.rename(columns={'index': 'Disease'})
 
 
 
@@ -936,4 +974,6 @@ for disease in disease_synonyms_dict:
 # - diseases not related through the DDN
 #difference_df_1_minus_2.to_csv("CT_disease_pairs_not_in_ddn.csv", index=False)  
 
+# - number of trials per disease that comprise the DDN
+#disease_trials_counts_df.to_csv("CT_disease_trials_counts_df.csv", index=False)  
 
